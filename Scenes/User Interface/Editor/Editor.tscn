@@ -1,8 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=20 format=3 uid="uid://pu0mwher7pq0"]
 
-[ext_resource type="Script" path="res://Scenes/User Interface/editor.gd" id="1_mgn8j"]
-[ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_71n75"]
-[ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="3_w4pfh"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
+[ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
+[ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="3_wssg3"]
+[ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
+[ext_resource type="Texture2D" uid="uid://cqc7hgdtjho4w" path="res://Scenes/User Interface/Editor/Icons/move-left.svg" id="5_oq7qi"]
+[ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
+[ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1x8m"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osrey"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color(0, 0, 0, 0.552941)
 
 [sub_resource type="InputEventKey" id="InputEventKey_exwrk"]
 device = -1
@@ -52,7 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mgn8j")
+script = ExtResource("1_ime2t")
 
 [node name="v" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -94,7 +108,7 @@ item_2/id = 2
 [node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
 item_count = 1
 item_0/text = "Go back to Origin"
-item_0/icon = ExtResource("2_71n75")
+item_0/icon = ExtResource("2_hnc5i")
 item_0/id = 0
 
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
@@ -102,22 +116,19 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 30
 
-[node name="Label" type="Label" parent="v/top/HBoxContainer/tools"]
+[node name="Tools Label" type="Label" parent="v/top/HBoxContainer/tools"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tools"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
+[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="v/top/HBoxContainer/tools/HBoxContainer"]
+[node name="filename" type="Label" parent="v/top"]
 layout_mode = 2
-text = "Select"
-
-[node name="Button2" type="Button" parent="v/top/HBoxContainer/tools/HBoxContainer"]
-layout_mode = 2
-text = "Place"
+size_flags_horizontal = 6
+text = "Unsaved Simulation"
 
 [node name="space" type="PanelContainer" parent="v"]
 layout_mode = 2
@@ -136,10 +147,10 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 536)
+size = Vector2i(1920, 976)
 render_target_update_mode = 4
 
-[node name="space" parent="v/space/SubViewportContainer/SubViewport" instance=ExtResource("3_w4pfh")]
+[node name="space" parent="v/space/SubViewportContainer/SubViewport" instance=ExtResource("3_wssg3")]
 
 [node name="bottom" type="MarginContainer" parent="v"]
 process_mode = 3
@@ -149,42 +160,65 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ColorRect" type="ColorRect" parent="v/bottom"]
-layout_mode = 2
-color = Color(0.298039, 0.298039, 0.298039, 1)
-
 [node name="h" type="HBoxContainer" parent="v/bottom"]
 layout_mode = 2
 
 [node name="slowest_button" type="Button" parent="v/bottom/h"]
 layout_mode = 2
+tooltip_text = "Slowest"
 focus_mode = 0
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_soh8f")
-text = "Slowest"
+icon = ExtResource("4_02nni")
 
 [node name="slower_button" type="Button" parent="v/bottom/h"]
 layout_mode = 2
+tooltip_text = "Slower"
 focus_mode = 0
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_ejxwk")
-text = "Slower"
+icon = ExtResource("5_oq7qi")
 
 [node name="pause_button" type="Button" parent="v/bottom/h"]
 layout_mode = 2
 focus_mode = 0
+theme_override_constants/outline_size = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_kl61j")
 text = "Pause"
 
 [node name="faster_button" type="Button" parent="v/bottom/h"]
 layout_mode = 2
+tooltip_text = "Faster"
 focus_mode = 0
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_v6gj8")
-text = "Faster"
+icon = ExtResource("6_6v10q")
+alignment = 0
+icon_alignment = 2
 
 [node name="fastest_button" type="Button" parent="v/bottom/h"]
 layout_mode = 2
+tooltip_text = "Fastest"
 focus_mode = 0
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_k0ai2")
-text = "Fastest"
+icon = ExtResource("7_35o54")
+icon_alignment = 2
 
 [node name="status" type="HBoxContainer" parent="v/bottom/h"]
 clip_contents = true

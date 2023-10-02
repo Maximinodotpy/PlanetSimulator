@@ -13,7 +13,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Editor"
 script = ExtResource("1_gifur")
-scene = "res://Scenes/User Interface/editor.tscn"
+scene = "res://Scenes/User Interface/Editor/Editor.tscn"
 
 [node name="Settings Button" type="Button" parent="m/v/VBoxContainer" index="1"]
 layout_mode = 2
