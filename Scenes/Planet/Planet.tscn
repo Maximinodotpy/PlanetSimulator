@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://cevt1u6tgo5bs"]
+
+[ext_resource type="Texture2D" uid="uid://b531vfswe8e0i" path="res://Scenes/Planet/planet.svg" id="1_hmn0j"]
+[ext_resource type="PackedScene" uid="uid://crnb8umwfskq4" path="res://Scenes/Gravity Object/Gravity Object Template.tscn" id="1_v4h3w"]
+[ext_resource type="Script" path="res://Scenes/Planet/planet_sprite.gd" id="2_sjp1w"]
+
+[node name="gravity object" instance=ExtResource("1_v4h3w")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("1_hmn0j")
+script = ExtResource("2_sjp1w")

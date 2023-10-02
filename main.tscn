@@ -1,0 +1,198 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2w7q3606ufdw"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_jhw62"]
+[ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="1_v341n"]
+[ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://icon.svg" id="2_4v4oq"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_exwrk"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_soh8f"]
+events = [SubResource("InputEventKey_exwrk")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_aihca"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_ejxwk"]
+events = [SubResource("InputEventKey_aihca")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8kbvp"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_kl61j"]
+events = [SubResource("InputEventKey_8kbvp")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_84my0"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="Shortcut" id="Shortcut_v6gj8"]
+events = [SubResource("InputEventKey_84my0")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_iq8te"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_k0ai2"]
+events = [SubResource("InputEventKey_iq8te")]
+
+[node name="main" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jhw62")
+
+[node name="v" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="top" type="MarginContainer" parent="v"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ColorRect" type="ColorRect" parent="v/top"]
+layout_mode = 2
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="v/top"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="v/top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="File" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
+item_count = 3
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Open"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 2
+
+[node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
+item_count = 1
+item_0/text = "Go back to Origin"
+item_0/icon = ExtResource("2_4v4oq")
+item_0/id = 0
+
+[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="v/top/HBoxContainer/tools"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Tools"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="v/top/HBoxContainer/tools/HBoxContainer"]
+layout_mode = 2
+text = "Select"
+
+[node name="Button2" type="Button" parent="v/top/HBoxContainer/tools/HBoxContainer"]
+layout_mode = 2
+text = "Place"
+
+[node name="space" type="PanelContainer" parent="v"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="v/space"]
+layout_mode = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="v/space"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="v/space/SubViewportContainer"]
+process_mode = 3
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 536)
+render_target_update_mode = 4
+
+[node name="space" parent="v/space/SubViewportContainer/SubViewport" instance=ExtResource("1_v341n")]
+
+[node name="bottom" type="MarginContainer" parent="v"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="v/bottom"]
+layout_mode = 2
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="h" type="HBoxContainer" parent="v/bottom"]
+layout_mode = 2
+
+[node name="slowest_button" type="Button" parent="v/bottom/h"]
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_soh8f")
+text = "Slowest"
+
+[node name="slower_button" type="Button" parent="v/bottom/h"]
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_ejxwk")
+text = "Slower"
+
+[node name="pause_button" type="Button" parent="v/bottom/h"]
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_kl61j")
+text = "Pause"
+
+[node name="faster_button" type="Button" parent="v/bottom/h"]
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_v6gj8")
+text = "Faster"
+
+[node name="fastest_button" type="Button" parent="v/bottom/h"]
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_k0ai2")
+text = "Fastest"
+
+[node name="status" type="HBoxContainer" parent="v/bottom/h"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+alignment = 2
+
+[connection signal="pressed" from="v/bottom/h/slower_button" to="." method="_on_slower_button_pressed"]
+[connection signal="pressed" from="v/bottom/h/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="v/bottom/h/faster_button" to="." method="_on_faster_button_pressed"]

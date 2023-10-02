@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://crnb8umwfskq4"]
+
+[ext_resource type="Script" path="res://Scenes/Gravity Object/Gravity Object Template.gd" id="1_t4r3k"]
+
+[node name="gravity object" type="Node2D" groups=["gravity_object"]]
+process_mode = 1
+script = ExtResource("1_t4r3k")

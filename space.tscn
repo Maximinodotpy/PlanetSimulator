@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgy8xkpbvycv7"]
+
+[ext_resource type="Script" path="res://space.gd" id="1_62147"]
+[ext_resource type="PackedScene" uid="uid://cevt1u6tgo5bs" path="res://Scenes/Planet/Planet.tscn" id="1_b0jfg"]
+[ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="2_0j8w0"]
+
+[node name="space" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_62147")
+
+[node name="Planet 2" parent="." instance=ExtResource("1_b0jfg")]
+position = Vector2(-685, 318)
+motion = Vector2(0, -100)
+
+[node name="Planet 1" parent="." instance=ExtResource("1_b0jfg")]
+position = Vector2(849, 318)
+weight = 10
+
+[node name="Panzoom Camera" type="Camera2D" parent="."]
+process_mode = 3
+script = ExtResource("2_0j8w0")
