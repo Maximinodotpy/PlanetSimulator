@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ohg750yfbej1"]
+
+[ext_resource type="PackedScene" uid="uid://dhrdbkvfafbq1" path="res://Scenes/User Interface/UI Template.tscn" id="1_i88d3"]
+[ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Settings View/settings_view.gd" id="2_8k2qw"]
+
+[node name="UI Template" instance=ExtResource("1_i88d3")]
+
+[node name="Label" parent="m/v" index="0"]
+text = "Settings"
+
+[node name="Settings View" type="VBoxContainer" parent="m/v/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_8k2qw")
+configFilePath = "user://settings.cfg"

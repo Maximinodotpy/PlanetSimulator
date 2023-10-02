@@ -11,15 +11,21 @@ config_version=5
 [application]
 
 config/name="Planet Simulator"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Scenes/User Interface/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Meta/icon.svg"
 
 [autoload]
 
 EventBus="*res://addons/godot_helpers/Singletons/EventBus.gd"
 Helpers="*res://addons/godot_helpers/Singletons/Helpers.gd"
 SpaceGlobal="*res://SpaceGlobal.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 
 [editor_plugins]
 
