@@ -7,5 +7,6 @@
 [node name="gravity object" instance=ExtResource("1_v4h3w")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_hmn0j")
 script = ExtResource("2_sjp1w")

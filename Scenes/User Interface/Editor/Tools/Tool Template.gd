@@ -2,6 +2,7 @@ extends Button
 
 var viewport: Viewport
 var tool_name: String = ''
+var shortcut_key = ''
 
 ##
 func clicked():
@@ -11,18 +12,21 @@ func clicked():
 func selected():
 	pass
 
+func mouse_moved():
+	pass
+
 ##
 func unselected():
 	pass
 
 ##
-func dragStart():
+func dragStart(startPos: Vector2):
 	pass
 
 ##
-func dragging():
+func dragging(startPos: Vector2, currentPos: Vector2):
 	pass
 
 ##
-func dragEnd():
+func dragEnd(startPos: Vector2, endPos: Vector2):
 	pass

@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=22 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
 [ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="3_wssg3"]
 [ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
+[ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="4_by8r2"]
 [ext_resource type="Texture2D" uid="uid://cqc7hgdtjho4w" path="res://Scenes/User Interface/Editor/Icons/move-left.svg" id="5_oq7qi"]
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
@@ -130,27 +132,62 @@ layout_mode = 2
 size_flags_horizontal = 6
 text = "Unsaved Simulation"
 
-[node name="space" type="PanelContainer" parent="v"]
+[node name="main" type="HSplitContainer" parent="v"]
 layout_mode = 2
 size_flags_vertical = 3
+split_offset = 300
 
-[node name="ColorRect" type="ColorRect" parent="v/space"]
+[node name="TabContainer" type="TabContainer" parent="v/main"]
+layout_mode = 2
+
+[node name="Properties" type="VBoxContainer" parent="v/main/TabContainer"]
+layout_mode = 2
+
+[node name="Objects" type="MarginContainer" parent="v/main/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Objects" type="VBoxContainer" parent="v/main/TabContainer/Objects"]
+layout_mode = 2
+script = ExtResource("3_8avdp")
+
+[node name="space" type="PanelContainer" parent="v/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="v/main/space"]
+visible = false
 layout_mode = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="v/space"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="v/main/space"]
 layout_mode = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="v/space/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="v/main/space/SubViewportContainer"]
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1920, 976)
+size = Vector2i(1608, 976)
 render_target_update_mode = 4
 
-[node name="space" parent="v/space/SubViewportContainer/SubViewport" instance=ExtResource("3_wssg3")]
+[node name="space" parent="v/main/space/SubViewportContainer/SubViewport" instance=ExtResource("3_wssg3")]
+
+[node name="Panzoom Camera" type="Camera2D" parent="v/main/space/SubViewportContainer/SubViewport"]
+process_mode = 3
+rotation_smoothing_enabled = true
+script = ExtResource("4_by8r2")
+
+[node name="SelectedRect" type="ColorRect" parent="v/main/space/SubViewportContainer/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0.380392)
 
 [node name="bottom" type="MarginContainer" parent="v"]
 process_mode = 3
@@ -227,6 +264,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 30
 alignment = 2
 
+[connection signal="gui_input" from="v/main/space/SubViewportContainer" to="." method="_on_sub_viewport_container_gui_input"]
 [connection signal="pressed" from="v/bottom/h/slower_button" to="." method="_on_slower_button_pressed"]
 [connection signal="pressed" from="v/bottom/h/pause_button" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="v/bottom/h/faster_button" to="." method="_on_faster_button_pressed"]
