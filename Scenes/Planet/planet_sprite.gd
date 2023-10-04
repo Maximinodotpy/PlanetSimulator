@@ -7,6 +7,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+#func _process(delta):
+#	scale = Vector2(get_parent().weight, get_parent().weight)
 
-	scale = Vector2(get_parent().weight, get_parent().weight)
+func _draw():
+	draw_circle(Vector2(0, 0), 500 * get_parent().weight, Color.WHITE)

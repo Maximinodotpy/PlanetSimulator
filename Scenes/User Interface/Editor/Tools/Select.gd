@@ -37,9 +37,16 @@ func dragEnd(starPos, endPos):
 	selectBox.size = Vector2(0, 0)
 	selectBox.position = Vector2(0, 0)
 
+	print('Select Finished')
+
+	if Input.is_key_pressed(KEY_SHIFT):
+		pass
+	else:
+		EditorGlobal.clear_selection()
+
 	for planet in viewport.get_tree().get_nodes_in_group('gravity_object'):
 		if currenSelectionRect.has_point(planet.position):
-			pass
+			EditorGlobal.add_to_selection(planet)
 
 func unselected():
 	selectBox.queue_free()

@@ -5,8 +5,15 @@ extends Node2D
 @export var affectsOthers = true
 @export var isAffectedByOthers = true
 
+func _ready():
+	print('GO Created')
+	print(motion)
+
 func _process(delta):
 	call_deferred("apply_motion", delta)
+
+	if not isAffectedByOthers:
+		return
 
 	for object in get_tree().get_nodes_in_group('gravity_object'):
 		if object == self:

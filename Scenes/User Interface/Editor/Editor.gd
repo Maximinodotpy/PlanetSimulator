@@ -3,14 +3,15 @@ extends Control
 
 @onready var status_container = $v/bottom/h/status
 
-@onready var spaceViewport = $v/main/space/SubViewportContainer/SubViewport
-@onready var space = $v/main/space/SubViewportContainer/SubViewport/space
+@onready var spaceViewport = EditorGlobal.get_space_viewport()
+@onready var space = EditorGlobal.get_space()
 
-const selectedObjects = []
+@onready var selectedRect = $v/main/SpaceContainer/SubViewportContainer/space_viewport/SelectedRect
 
 var tools = [
 	preload("res://Scenes/User Interface/Editor/Tools/Move.gd").new(),
 	preload("res://Scenes/User Interface/Editor/Tools/Select.gd").new(),
+	preload("res://Scenes/User Interface/Editor/Tools/Create.gd").new()
 ]
 
 var currentTool = 0
@@ -19,11 +20,6 @@ var dragStart: Vector2
 
 func _ready():
 	# Create Tools
-	var toolSwitched = func(button: Button = Button.new()):
-		tools[currentTool].unselected()
-		currentTool = button.get_meta('id', 0)
-		tools[currentTool].selected()
-
 	var buttonGroup = ButtonGroup.new()
 
 	buttonGroup.connect("pressed", toolSwitched)
@@ -55,9 +51,29 @@ func _ready():
 
 	tools[currentTool].selected()
 
+
+func toolSwitched(button: Button = Button.new()):
+		tools[currentTool].unselected()
+
+		print('Switching Tool from "%s" to "%s"' % [
+			tools[currentTool].tool_name,
+			tools[button.get_meta('id', 0)].tool_name
+		])
+
+		currentTool = button.get_meta('id', 0)
+		tools[currentTool].selected()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	SpaceGlobal.simulationSpeed = clampf(SpaceGlobal.simulationSpeed, 0.1, 10)
+
+	var selection_rect = EditorGlobal.get_selection_rect()
+
+	selectedRect.position = selection_rect.position
+	selectedRect.size = selection_rect.size
+
+	if Input.is_key_pressed(KEY_DELETE):
+		EditorGlobal.delete_selected()
 
 	for i in status_container.get_children():
 		i.queue_free()
@@ -71,7 +87,7 @@ func _process(delta):
 
 	addStatus('Planets: %s' % get_tree().get_nodes_in_group('gravity_object').size())
 
-	addStatus('Selected Planets: %s' % selectedObjects.size())
+	addStatus('Selected Planets: %s' % EditorGlobal.get_selection().size())
 
 	addStatus('FPS: %s' % Performance.get_monitor(Performance.TIME_FPS))
 
