@@ -4,16 +4,16 @@ extends MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	EditorGlobal.selection_changed.connect(renderUI)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
-	## TODO Only refresh on selection change
-	renderUI()
+	if not get_tree().paused:
+		renderUI()
 
 func renderUI():
+#	print('Rendering Property UI')
 	for child in container.get_children():
 		child.queue_free()
 
@@ -27,16 +27,10 @@ func renderUI():
 	elif selection.size() == 1:
 		topLabel.text = selection[0].name
 
-		var object = selection[0]
-
-		# Show Velocity
-		container.add_child(createInfoRow(
-			'Velocity',
-			'%s/%s' % [
-				round(object.motion.x),
-				round(object.motion.y)
-			]
-		))
+		if get_tree().paused:
+			pass
+		else:
+			uiSingleOngoing()
 
 	else:
 		topLabel.text = 'Multiple Objects Selected'
@@ -51,3 +45,43 @@ func createInfoRow(label_text: String, data: String):
 	hbox.add_child(label)
 	hbox.add_child(dataLabel)
 	return hbox
+
+func uiSingleOngoing():
+	var object = EditorGlobal.get_selection()[0]
+
+	# Show Velocity
+	container.add_child(createInfoRow(
+		'Velocity',
+		'%s/%s' % [
+			round(object.motion.x),
+			round(object.motion.y)
+		]
+	))
+
+	container.add_child(createInfoRow(
+		'Position',
+		'%s/%s' % [
+			round(object.position.x),
+			round(object.position.y)
+		]
+	))
+
+	container.add_child(createInfoRow(
+		'Weight',
+		str(object.weight)
+	))
+
+	container.add_child(createInfoRow(
+		'Affects Other',
+		str(object.affectsOthers)
+	))
+
+	container.add_child(createInfoRow(
+		'Is Affected By Others',
+		str(object.isAffectedByOthers)
+	))
+
+	container.add_child(createInfoRow(
+		'PAUSE THE SIMULATION TO EDIT PROPERTIES',
+		''
+	))

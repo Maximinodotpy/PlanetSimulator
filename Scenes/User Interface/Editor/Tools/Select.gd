@@ -2,6 +2,7 @@ extends "res://Scenes/User Interface/Editor/Tools/Tool Template.gd"
 
 var selectBox: ColorRect
 var currenSelectionRect = Rect2(0,0,0,0)
+var moveOffset : Vector2
 
 func _init():
 	tool_name = 'Select'
@@ -23,6 +24,7 @@ func dragStart(startPos):
 	selectBox.position = startPos
 
 func dragging(startPos, currentPos):
+
 	currenSelectionRect = Rect2(
 		min(startPos.x, currentPos.x),
 		min(startPos.y, currentPos.y),
@@ -47,6 +49,20 @@ func dragEnd(starPos, endPos):
 	for planet in viewport.get_tree().get_nodes_in_group('gravity_object'):
 		if currenSelectionRect.has_point(planet.position):
 			EditorGlobal.add_to_selection(planet)
+
+func selectionDragStart(startPos):
+	moveOffset = EditorGlobal.get_selection_rect().position - startPos
+	print('moveOffset', moveOffset)
+
+func selectionDragging(startPos, currentPos):
+	var targetPos = currentPos + moveOffset
+
+	if Input.is_key_pressed(KEY_SHIFT):
+		targetPos = targetPos.snapped(Vector2(100, 100))
+	elif Input.is_key_pressed(KEY_CTRL):
+		targetPos = targetPos.snapped(EditorGlobal.get_selection_bounding_rect().size)
+
+	EditorGlobal.move_selected_to(targetPos)
 
 func unselected():
 	selectBox.queue_free()

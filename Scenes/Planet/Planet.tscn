@@ -23,13 +23,13 @@ func _process(delta):
 
 [node name="gravity object" instance=ExtResource("1_v4h3w")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-scale = Vector2(0.01, 0.01)
-script = ExtResource("2_sjp1w")
-
-[node name="Line2D" type="Line2D" parent="." index="1"]
+[node name="Line2D" type="Line2D" parent="." index="0"]
 process_mode = 3
 points = PackedVector2Array(0, 0, 1, 0)
 width = 5.0
 default_color = Color(1, 0.552941, 1, 1)
 script = SubResource("GDScript_n8yle")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+scale = Vector2(0.01, 0.01)
+script = ExtResource("2_sjp1w")

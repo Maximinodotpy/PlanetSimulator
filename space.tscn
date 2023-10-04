@@ -31,3 +31,17 @@ offset_bottom = 15582.0
 texture = ExtResource("4_m7m4r")
 expand_mode = 2
 stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 2441.0
+color = Color(1, 1, 1, 0.278431)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 2449.0
+rotation = -1.57079
+color = Color(1, 1, 1, 0.278431)

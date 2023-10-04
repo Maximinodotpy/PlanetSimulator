@@ -17,6 +17,7 @@ var tools = [
 var currentTool = 0
 var isDragging = false
 var dragStart: Vector2
+var isDraggingSelection = false
 
 func _ready():
 	# Create Tools
@@ -67,7 +68,7 @@ func toolSwitched(button: Button = Button.new()):
 func _process(delta):
 	SpaceGlobal.simulationSpeed = clampf(SpaceGlobal.simulationSpeed, 0.1, 10)
 
-	var selection_rect = EditorGlobal.get_selection_rect()
+	var selection_rect = EditorGlobal.get_selection_bounding_rect()
 
 	selectedRect.position = selection_rect.position
 	selectedRect.size = selection_rect.size
@@ -119,20 +120,38 @@ func _on_faster_button_pressed():
 
 
 func _on_sub_viewport_container_gui_input(event):
+	var mousePosition = space.get_global_mouse_position()
+	var currentToolScript = tools[currentTool]
+
 	if event is InputEventMouseMotion:
 		if isDragging:
-			tools[currentTool].dragging(dragStart, space.get_global_mouse_position())
+			if isDraggingSelection:
+				currentToolScript.selectionDragging(dragStart, mousePosition)
+			else:
+				currentToolScript.dragging(dragStart, mousePosition)
 
-		tools[currentTool].mouse_moved()
+		currentToolScript.mouse_moved()
 
 	elif event is InputEventMouseButton:
 
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				isDragging = true
-				dragStart = space.get_global_mouse_position()
-				tools[currentTool].dragStart(dragStart)
+				isDraggingSelection = EditorGlobal.get_selection_bounding_rect().has_point(mousePosition)
+
+				dragStart = mousePosition
+				if isDraggingSelection:
+					currentToolScript.selectionDragStart(dragStart)
+				else:
+					currentToolScript.dragStart(dragStart)
+
 			else:
 				isDragging = false
-				tools[currentTool].clicked()
-				tools[currentTool].dragEnd(dragStart, space.get_global_mouse_position())
+				currentToolScript.clicked()
+
+				if isDraggingSelection:
+					currentToolScript.selectionDragEnd(dragStart, mousePosition)
+				else:
+					currentToolScript.dragEnd(dragStart, mousePosition)
+
+				isDraggingSelection = false
