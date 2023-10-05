@@ -1,23 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://demhpf11kk21k"]
+[gd_scene load_steps=5 format=3 uid="uid://demhpf11kk21k"]
 
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="1_gifur"]
 [ext_resource type="PackedScene" uid="uid://dhrdbkvfafbq1" path="res://Scenes/User Interface/UI Template.tscn" id="1_osley"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0hx3"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="GDScript" id="GDScript_6u0x5"]
+script/source = "extends VBoxContainer
+
+var savedItemUI = preload(\"res://Scenes/User Interface/SavedItem.tscn\")
+
+func _ready():
+	for save_name in EditorSaves.get_all_save_names():
+		print(save_name)
+
+		var savedItemUIInstance = savedItemUI.instantiate()
+
+		savedItemUIInstance.save_name = save_name
+
+		add_child(savedItemUIInstance)
+
+"
 
 [node name="Main" instance=ExtResource("1_osley")]
 
 [node name="Label" parent="m/v" index="0"]
 text = "Planet Simulator"
 
-[node name="Editor Button" type="Button" parent="m/v/VBoxContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="m/v/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_n0hx3")
+
+[node name="MarginContainer" type="MarginContainer" parent="m/v/VBoxContainer/PanelContainer" index="0"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="m/v/VBoxContainer/PanelContainer/MarginContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Editor Button" type="Button" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Editor"
+text = "Open Editor (New Simulation)"
 script = ExtResource("1_gifur")
 scene = "res://Scenes/User Interface/Editor/Editor.tscn"
 
-[node name="Settings Button" type="Button" parent="m/v/VBoxContainer" index="1"]
+[node name="scroll" type="ScrollContainer" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="saves" type="VBoxContainer" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/scroll" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+script = SubResource("GDScript_6u0x5")
+
+[node name="Settings Button" type="Button" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Settings"
 script = ExtResource("1_gifur")
 scene = "res://Scenes/User Interface/Settings/Settings.tscn"
+
+[node name="HBoxContainer" parent="m/v" index="2"]
+visible = false

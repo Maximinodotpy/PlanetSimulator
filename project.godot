@@ -20,6 +20,7 @@ config/icon="res://Meta/icon.svg"
 EventBus="*res://addons/godot_helpers/Singletons/EventBus.gd"
 Helpers="*res://addons/godot_helpers/Singletons/Helpers.gd"
 EditorGlobal="*res://Editor Global.gd"
+EditorSaves="*res://Editor Saves.gd"
 
 [display]
 

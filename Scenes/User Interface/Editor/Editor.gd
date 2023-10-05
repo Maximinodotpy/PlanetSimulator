@@ -20,6 +20,9 @@ var dragStart: Vector2
 var isDraggingSelection = false
 
 func _ready():
+	if EditorSaves.currentSaveName != '':
+		EditorSaves.load_file()
+
 	# Create Tools
 	var buttonGroup = ButtonGroup.new()
 

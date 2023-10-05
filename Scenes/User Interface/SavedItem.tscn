@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://ngpsrwvqke7u"]
+
+[sub_resource type="GDScript" id="GDScript_h3g4j"]
+resource_name = "Saved Item UI"
+script/source = "extends HBoxContainer
+
+var save_name: String = ''
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$\"Open\".pressed.connect(openCallback)
+	$\"Delete\".pressed.connect(deleteCallback)
+
+
+func _process(delta):
+	$\"name\".text = save_name
+
+func openCallback():
+	print('Opening \"%s\"' % save_name)
+
+	EditorSaves.currentSaveName = save_name
+
+	get_tree().change_scene_to_file(\"res://Scenes/User Interface/Editor/Editor.tscn\")
+
+func deleteCallback():
+	print('Deleting \"%s\"' % save_name)
+
+	print(EditorSaves.delete_save(save_name))
+
+	get_tree().reload_current_scene()
+
+
+"
+
+[node name="item" type="HBoxContainer"]
+script = SubResource("GDScript_h3g4j")
+
+[node name="name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "fasdfasdfasd"
+
+[node name="Open" type="Button" parent="."]
+layout_mode = 2
+text = "Open"
+
+[node name="Delete" type="Button" parent="."]
+layout_mode = 2
+text = "Delete"

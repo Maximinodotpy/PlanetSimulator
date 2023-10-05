@@ -154,8 +154,4 @@ func get_space_viewport() -> SubViewport:
 	return Helpers.getSceneRoot().find_children('space_viewport')[0]
 
 
-func load_file():
-	pass
 
-func save_file():
-	pass

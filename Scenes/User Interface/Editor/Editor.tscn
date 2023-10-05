@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=31 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -15,6 +15,47 @@
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
+
+[sub_resource type="GDScript" id="GDScript_1m1dd"]
+resource_name = "File Menu"
+script/source = "extends PopupMenu
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	index_pressed.connect(callback)
+
+func callback(id: int):
+	var item_text = get_item_text(id)
+
+	if item_text == 'Save':
+		EditorSaves.save_file()
+	if item_text == 'Exit':
+		EditorSaves.save_file()
+		EditorSaves.currentSaveName = ''
+		get_tree().change_scene_to_file(\"res://Scenes/User Interface/Main.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_m62k6"]
+resource_name = "File Name Edit"
+script/source = "extends LineEdit
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	text = EditorSaves.currentSaveName
+
+	text_submitted.connect(text_suggested)
+
+
+func text_suggested(new_text: String):
+	if not new_text in EditorSaves.get_all_save_names() or EditorSaves.currentSaveName == new_text:
+		print(new_text)
+		EditorSaves.currentSaveName = new_text
+		release_focus()
+
+
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -113,12 +154,32 @@ theme_override_constants/margin_bottom = 5
 [node name="HBoxContainer" type="HBoxContainer" parent="v/top"]
 layout_mode = 2
 
-[node name="Editor Button" type="Button" parent="v/top/HBoxContainer"]
+[node name="Main Menu Button" type="Button" parent="v/top/HBoxContainer"]
+process_mode = 3
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Main Menu"
 script = ExtResource("2_dgr1r")
 scene = "res://Scenes/User Interface/Main.tscn"
+
+[node name="MenuBar" type="MenuBar" parent="v/top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="File" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
+item_count = 2
+item_0/text = "Save"
+item_0/id = 2
+item_1/text = "Exit"
+item_1/id = 1
+script = SubResource("GDScript_1m1dd")
+
+[node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
+item_count = 1
+item_0/text = "Go back to Origin"
+item_0/icon = ExtResource("2_hnc5i")
+item_0/id = 0
 
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
 layout_mode = 2
@@ -135,31 +196,22 @@ vertical_alignment = 1
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="v/top/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="File" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
-item_count = 3
-item_0/text = "New"
-item_0/id = 0
-item_1/text = "Open"
-item_1/id = 1
-item_2/text = "Save"
-item_2/id = 2
-
-[node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
-item_count = 1
-item_0/text = "Go back to Origin"
-item_0/icon = ExtResource("2_hnc5i")
-item_0/id = 0
-
 [node name="filename" type="Label" parent="v/top"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Unsaved Simulation"
+
+[node name="File Name Edit" type="LineEdit" parent="v/top"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 1
+placeholder_text = "File Name"
+alignment = 1
+expand_to_text_length = true
+flat = true
+script = SubResource("GDScript_m62k6")
 
 [node name="main" type="HSplitContainer" parent="v"]
 layout_mode = 2
