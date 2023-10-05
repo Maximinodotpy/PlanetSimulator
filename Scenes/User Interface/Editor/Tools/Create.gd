@@ -1,7 +1,5 @@
 extends "res://Scenes/User Interface/Editor/Tools/Tool Template.gd"
 
-var planet = preload("res://Scenes/Planet/Planet.tscn")
-
 func _init():
 	tool_name = 'Create'
 	shortcut_key = KEY_C
@@ -16,15 +14,12 @@ func dragging(startPos, currentPos):
 	pass
 
 func dragEnd(starPos, endPos):
-	print('Clicked (Drag End)')
+	print('Creating Planet')
 
-	var planeteI: Node2D = planet.instantiate()
+	var planet: Planet = EditorGlobal.add_object(EditorGlobal.OBJECT_TYPES.Planet)
 
-	planeteI.position = endPos
-
-	planeteI.motion = (starPos - endPos) * 5
-
-	EditorGlobal.get_space().add_child(planeteI)
+	planet.position = endPos
+	planet.motion = (starPos - endPos) * 5
 
 func unselected():
 	pass

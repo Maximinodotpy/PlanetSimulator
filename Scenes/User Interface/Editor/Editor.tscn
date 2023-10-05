@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=26 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
+[ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
 [ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Properties.gd" id="3_lsvst"]
@@ -104,6 +105,28 @@ color = Color(0.298039, 0.298039, 0.298039, 1)
 [node name="HBoxContainer" type="HBoxContainer" parent="v/top"]
 layout_mode = 2
 
+[node name="Editor Button" type="Button" parent="v/top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Main Menu"
+script = ExtResource("2_dgr1r")
+scene = "res://Scenes/User Interface/Main.tscn"
+
+[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="Tools Label" type="Label" parent="v/top/HBoxContainer/tools"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Tools"
+vertical_alignment = 1
+
+[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
+layout_mode = 2
+
 [node name="MenuBar" type="MenuBar" parent="v/top/HBoxContainer"]
 visible = false
 layout_mode = 2
@@ -124,22 +147,8 @@ item_0/text = "Go back to Origin"
 item_0/icon = ExtResource("2_hnc5i")
 item_0/id = 0
 
-[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 4
-theme_override_constants/separation = 30
-
-[node name="Tools Label" type="Label" parent="v/top/HBoxContainer/tools"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Tools"
-vertical_alignment = 1
-
-[node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
-layout_mode = 2
-
 [node name="filename" type="Label" parent="v/top"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Unsaved Simulation"
@@ -181,6 +190,7 @@ layout_mode = 2
 
 [node name="Objects" type="VBoxContainer" parent="v/main/v-split/top-tabs/Objects/scroll"]
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("3_8avdp")
 
 [node name="bottom-tabs" type="TabContainer" parent="v/main/v-split"]
@@ -395,7 +405,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1608, 981)
+size = Vector2i(1608, 976)
 render_target_update_mode = 4
 
 [node name="SelectedRect" type="Panel" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
@@ -409,6 +419,26 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ks2h5")
 process_mode = 3
 rotation_smoothing_enabled = true
 script = ExtResource("4_by8r2")
+
+[node name="origin_marker" type="Control" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
+modulate = Color(0, 0.45098, 0.454902, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/origin_marker"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 2441.0
+
+[node name="ColorRect2" type="ColorRect" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/origin_marker"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 2449.0
+rotation = -1.57079
 
 [node name="bottom" type="MarginContainer" parent="v"]
 process_mode = 3

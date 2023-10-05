@@ -6,6 +6,8 @@ var quickActionsAlways = [
 
 var quickActionsNothing = [
 	[ 'Select All', EditorGlobal.select_all ],
+	[ 'Select One Random', EditorGlobal.select_all ],
+	[ 'Select Many Random', EditorGlobal.select_all ],
 ]
 
 var quickActionsSingle = [

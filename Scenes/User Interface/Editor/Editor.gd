@@ -66,7 +66,7 @@ func toolSwitched(button: Button = Button.new()):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	SpaceGlobal.simulationSpeed = clampf(SpaceGlobal.simulationSpeed, 0.1, 10)
+	EditorGlobal.simulationSpeed = clampf(EditorGlobal.simulationSpeed, 0.1, 10)
 
 	var selection_rect = EditorGlobal.get_selection_bounding_rect()
 
@@ -92,7 +92,7 @@ func _process(delta):
 
 	addStatus('FPS: %s' % Performance.get_monitor(Performance.TIME_FPS))
 
-	addStatus('Simulation Speed: %s%%' % [ SpaceGlobal.simulationSpeed * 100 ])
+	addStatus('Simulation Speed: %s%%' % [ EditorGlobal.simulationSpeed * 100 ])
 
 
 
@@ -113,10 +113,10 @@ func _on_pause_button_pressed():
 
 
 func _on_slower_button_pressed():
-	SpaceGlobal.simulationSpeed -= 0.1
+	EditorGlobal.simulationSpeed -= 0.1
 
 func _on_faster_button_pressed():
-	SpaceGlobal.simulationSpeed += 0.1
+	EditorGlobal.simulationSpeed += 0.1
 
 
 func _on_sub_viewport_container_gui_input(event):

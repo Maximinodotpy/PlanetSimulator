@@ -6,8 +6,9 @@ extends Node2D
 @export var isAffectedByOthers = true
 
 func _ready():
-	print('GO Created')
+	print('Gravity Object Created')
 	print(motion)
+	print(get_groups())
 
 func _process(delta):
 	call_deferred("apply_motion", delta)
@@ -33,4 +34,4 @@ func grav_force(m1, m2, r):
 	return formula
 
 func apply_motion(delta):
-	position += motion * delta * SpaceGlobal.simulationSpeed
+	set_position(position + motion * delta * EditorGlobal.simulationSpeed)

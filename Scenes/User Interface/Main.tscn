@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="1_gifur"]
 [ext_resource type="PackedScene" uid="uid://dhrdbkvfafbq1" path="res://Scenes/User Interface/UI Template.tscn" id="1_osley"]
 
-[node name="UI Template" instance=ExtResource("1_osley")]
+[node name="Main" instance=ExtResource("1_osley")]
 
 [node name="Label" parent="m/v" index="0"]
 text = "Planet Simulator"
@@ -20,4 +20,4 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Settings"
 script = ExtResource("1_gifur")
-scene = "res://Scenes/User Interface/Settings.tscn"
+scene = "res://Scenes/User Interface/Settings/Settings.tscn"

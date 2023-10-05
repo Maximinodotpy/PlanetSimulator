@@ -3,8 +3,29 @@ extends Node
 ## Global Editor Functions for the Selection and Loading Files
 
 var selection = []
+var simulationSpeed = 1
+
+var planetScene = preload("res://Scenes/Planet/Planet.tscn")
 
 signal selection_changed
+
+## This is called when
+## The Selection Changes
+## An Object is added or removed
+signal anything_changed
+
+
+enum OBJECT_TYPES {
+	Planet,
+	Ship
+}
+
+
+func _ready():
+	var callAnythingChanged = func():
+		anything_changed.emit()
+
+	connect('selection_changed', callAnythingChanged)
 
 func get_selection():
 	return selection
@@ -24,8 +45,9 @@ func clear_selection():
 
 	selection_changed.emit()
 
-func remove_from_selection():
-	pass
+func remove_from_selection(node: Node2D):
+	if node in get_selection():
+		get_selection().erase(node)
 
 func get_selection_rect() -> Rect2:
 	var rect = Rect2()
@@ -59,10 +81,10 @@ func get_selection_bounding_rect() -> Rect2:
 	return rect
 
 func delete_selected():
-	for i in get_selection():
-		i.queue_free()
+	for object in get_selection():
+		remove_object(object)
 
-	clear_selection()
+	selection_changed.emit()
 
 func move_selected_to(target_pos: Vector2):
 	var offset = target_pos - get_selection_rect().position
@@ -103,6 +125,25 @@ func center_selection_horizontaly():
 		object.position.x = xCenter
 
 
+func remove_object(node: Node2D):
+	remove_from_selection(node)
+	node.free()
+	anything_changed.emit()
+
+func add_object(type: OBJECT_TYPES):
+	print('Adding Planet')
+
+	var grav_obj: Planet = planetScene.instantiate()
+
+	get_space().add_child(grav_obj)
+
+	anything_changed.emit()
+
+	return grav_obj
+
+func rename_object(object: Node2D, new_name: String):
+	object.name = new_name
+	anything_changed.emit()
 
 
 func get_space() -> Node2D:

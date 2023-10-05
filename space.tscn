@@ -1,24 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgy8xkpbvycv7"]
+[gd_scene load_steps=3 format=3 uid="uid://dgy8xkpbvycv7"]
 
-[ext_resource type="Script" path="res://space.gd" id="1_62147"]
 [ext_resource type="PackedScene" uid="uid://cevt1u6tgo5bs" path="res://Scenes/Planet/Planet.tscn" id="1_b0jfg"]
 [ext_resource type="Texture2D" uid="uid://bggkiqbwapkjd" path="res://Graphics/kenney_prototype-textures/PNG/Dark/texture_08.png" id="4_m7m4r"]
 
 [node name="space" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_62147")
-
-[node name="Planet 2" parent="." instance=ExtResource("1_b0jfg")]
-position = Vector2(-685, 318)
-motion = Vector2(0, -100)
-
-[node name="Planet 3" parent="." instance=ExtResource("1_b0jfg")]
-position = Vector2(-685, 318)
-motion = Vector2(0, 100)
-
-[node name="Planet 1" parent="." instance=ExtResource("1_b0jfg")]
-position = Vector2(849, 318)
-weight = 10
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -32,16 +18,13 @@ texture = ExtResource("4_m7m4r")
 expand_mode = 2
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -8.0
-offset_right = 8.0
-offset_bottom = 2441.0
-color = Color(1, 1, 1, 0.278431)
+[node name="Planet 2" parent="." instance=ExtResource("1_b0jfg")]
+position = Vector2(-685, 318)
+motion = Vector2(0, -100)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = -8.0
-offset_top = 8.0
-offset_right = 8.0
-offset_bottom = 2449.0
-rotation = -1.57079
-color = Color(1, 1, 1, 0.278431)
+[node name="Planet 3" parent="." instance=ExtResource("1_b0jfg")]
+position = Vector2(-685, 318)
+motion = Vector2(0, 100)
+
+[node name="Planet 1" parent="." instance=ExtResource("1_b0jfg")]
+position = Vector2(849, 318)
