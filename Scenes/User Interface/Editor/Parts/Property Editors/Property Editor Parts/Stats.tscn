@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxhwn4decf4gi"]
+
+[ext_resource type="PackedScene" uid="uid://bobdpohkcvvnx" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Weight.tscn" id="1_bysfu"]
+[ext_resource type="PackedScene" uid="uid://bcyrd3e8nlpp8" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Direction.tscn" id="2_dbx5r"]
+
+[node name="stats" type="VBoxContainer"]
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Stats"
+
+[node name="Weight" parent="." instance=ExtResource("1_bysfu")]
+layout_mode = 2
+
+[node name="Direction" parent="." instance=ExtResource("2_dbx5r")]
+layout_mode = 2

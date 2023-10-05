@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bobdpohkcvvnx"]
+
+[sub_resource type="GDScript" id="GDScript_sbxg6"]
+script/source = "extends HBoxContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	EditorGlobal.selection_changed.connect(render)
+
+func render():
+	var collective_weight = 0
+
+	for object in EditorGlobal.get_selection():
+		collective_weight += object.weight
+
+	$\"Data\".text = str(collective_weight)
+"
+
+[node name="weight" type="HBoxContainer"]
+script = SubResource("GDScript_sbxg6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Collective Weight"
+
+[node name="Data" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "900"

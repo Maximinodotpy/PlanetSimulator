@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcyrd3e8nlpp8"]
+
+[ext_resource type="Texture2D" uid="uid://cpi8c2nh7sfae" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom camera icon.svg" id="1_7h27e"]
+
+[sub_resource type="GDScript" id="GDScript_alyed"]
+script/source = "extends HBoxContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	var accumulated = Vector2()
+
+	for object in EditorGlobal.get_selection():
+		accumulated += object.motion.normalized()
+
+	accumulated = accumulated.normalized()
+
+	$\"SubViewportContainer/SubViewport/Line2D\".points[1] = (accumulated * 50) + Vector2(50, 50)
+"
+
+[sub_resource type="Curve" id="Curve_bcysu"]
+bake_resolution = 1000
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="direction" type="HBoxContainer"]
+script = SubResource("GDScript_alyed")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "General Direction"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+visible = false
+position = Vector2(50, 50)
+texture = ExtResource("1_7h27e")
+
+[node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport"]
+points = PackedVector2Array(50, 50, 10, 50)
+width_curve = SubResource("Curve_bcysu")

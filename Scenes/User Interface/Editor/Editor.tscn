@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=29 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -8,10 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="3_wssg3"]
 [ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="4_by8r2"]
+[ext_resource type="PackedScene" uid="uid://b36rnbp41eree" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Property Label.tscn" id="5_5tj81"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Quick Actions.gd" id="5_n7l7m"]
+[ext_resource type="PackedScene" uid="uid://ch2vv8qw1ictp" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorMultiple.tscn" id="5_n20wa"]
 [ext_resource type="Texture2D" uid="uid://cqc7hgdtjho4w" path="res://Scenes/User Interface/Editor/Icons/move-left.svg" id="5_oq7qi"]
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
+[ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -81,6 +84,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ime2t")
 
+[node name="generel_bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
 [node name="v" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -97,10 +109,6 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
-
-[node name="ColorRect" type="ColorRect" parent="v/top"]
-layout_mode = 2
-color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="v/top"]
 layout_mode = 2
@@ -175,6 +183,15 @@ theme_override_constants/margin_bottom = 10
 script = ExtResource("3_lsvst")
 
 [node name="v" type="VBoxContainer" parent="v/main/v-split/top-tabs/Properties"]
+layout_mode = 2
+
+[node name="Property Label" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_5tj81")]
+layout_mode = 2
+
+[node name="Property Editor Multiple" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
+layout_mode = 2
+
+[node name="Property Editor Single" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("7_yxhf3")]
 layout_mode = 2
 
 [node name="Objects" type="MarginContainer" parent="v/main/v-split/top-tabs"]
@@ -405,7 +422,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1608, 976)
+size = Vector2i(1573, 976)
 render_target_update_mode = 4
 
 [node name="SelectedRect" type="Panel" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]

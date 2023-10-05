@@ -41,8 +41,6 @@ func lineEditCallback(object: Node2D, lineedit: LineEdit):
 	EditorGlobal.rename_object(object, lineedit.text)
 
 func checkBoxCallback(object: Node2D, checkbox: CheckBox):
-	print('CHECK', checkbox.button_pressed)
-
 	if checkbox.button_pressed:
 		EditorGlobal.add_to_selection(object)
 	else:

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b215ntnknguk7"]
+
+[node name="affects_others_hbox" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Affect Others"
+
+[node name="actions" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="yes_button" type="Button" parent="actions"]
+layout_mode = 2
+tooltip_text = "Reverse this Property for every Selected Object."
+theme_override_font_sizes/font_size = 20
+text = "Yes"
+
+[node name="no_button" type="Button" parent="actions"]
+layout_mode = 2
+tooltip_text = "Reverse this Property for every Selected Object."
+theme_override_font_sizes/font_size = 20
+text = "No"
+
+[node name="reverse_button" type="Button" parent="actions"]
+layout_mode = 2
+tooltip_text = "Reverse this Property for every Selected Object."
+theme_override_font_sizes/font_size = 20
+text = "Reverse"

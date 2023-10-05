@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://tn815bk1ttbo"]
+
+[ext_resource type="PackedScene" uid="uid://dxhwn4decf4gi" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Stats.tscn" id="1_eeflp"]
+
+[node name="Property Editor Single" type="VBoxContainer"]
+
+[node name="stats" parent="." instance=ExtResource("1_eeflp")]
+layout_mode = 2

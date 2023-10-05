@@ -48,6 +48,7 @@ func clear_selection():
 func remove_from_selection(node: Node2D):
 	if node in get_selection():
 		get_selection().erase(node)
+	selection_changed.emit()
 
 func get_selection_rect() -> Rect2:
 	var rect = Rect2()

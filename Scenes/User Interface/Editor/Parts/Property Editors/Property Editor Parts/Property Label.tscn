@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b36rnbp41eree"]
+
+[sub_resource type="GDScript" id="GDScript_8mc3y"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if EditorGlobal.get_selection().size() == 0:
+		text = 'Nothing Selected'
+	elif EditorGlobal.get_selection().size() == 1:
+		text = EditorGlobal.get_selection()[0].name
+	elif EditorGlobal.get_selection().size() > 1:
+		text = 'Multiple Objects (%s)' % [ EditorGlobal.get_selection().size() ]
+"
+
+[node name="Property Label" type="Label"]
+script = SubResource("GDScript_8mc3y")
