@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Properties.gd" id="3_lsvst"]
-[ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://space.tscn" id="3_wssg3"]
+[ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://Scenes/Space.tscn" id="3_wssg3"]
 [ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="4_by8r2"]
 [ext_resource type="PackedScene" uid="uid://b36rnbp41eree" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Property Label.tscn" id="5_5tj81"]
