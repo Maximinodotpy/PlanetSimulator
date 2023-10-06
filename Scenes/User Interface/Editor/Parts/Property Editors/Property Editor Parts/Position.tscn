@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjrshu0bu4nev"]
+
+[sub_resource type="GDScript" id="GDScript_xg48r"]
+resource_name = "Position"
+script/source = "extends HBoxContainer
+
+@onready var y_spin_box = $xy/y/YSpinBox
+@onready var x_spin_box = $xy/x/XSpinBox
+
+var timer = Timer.new()
+
+func _ready():
+	x_spin_box.value_changed.connect(x_call_back)
+	y_spin_box.value_changed.connect(y_call_back)
+
+	EditorGlobal.anything_changed.connect(render)
+
+	add_child(timer)
+	timer.start(0.5)
+	timer.timeout.connect(render)
+
+func render():
+	if not x_spin_box.has_focus():
+		x_spin_box.set_value_no_signal(EditorGlobal.get_selection_rect().position.x)
+	if not y_spin_box.has_focus():
+		y_spin_box.set_value_no_signal(EditorGlobal.get_selection_rect().position.y)
+
+func x_call_back(new_val):
+	print('Mving X to ', new_val)
+	EditorGlobal.move_selected_to(Vector2(
+		new_val,
+		EditorGlobal.get_selection_rect().position.y
+	))
+
+func y_call_back(new_val):
+	EditorGlobal.move_selected_to(Vector2(
+		EditorGlobal.get_selection_rect().position.x,
+		new_val
+	))
+"
+
+[node name="Position" type="HBoxContainer"]
+script = SubResource("GDScript_xg48r")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Position"
+
+[node name="xy" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="x" type="HBoxContainer" parent="xy"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="xy/x"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "X"
+vertical_alignment = 1
+
+[node name="XSpinBox" type="SpinBox" parent="xy/x"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+allow_greater = true
+allow_lesser = true
+
+[node name="y" type="HBoxContainer" parent="xy"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="xy/y"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Y"
+vertical_alignment = 1
+
+[node name="YSpinBox" type="SpinBox" parent="xy/y"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+allow_greater = true
+allow_lesser = true

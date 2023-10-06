@@ -17,7 +17,6 @@ func get_all_save_names():
 func delete_save(name: String):
 	return OS.move_to_trash(ProjectSettings.globalize_path(savesDir + '/' + name))
 
-
 func is_save_name_valid(name: String):
 	if name == '':
 		return false
@@ -39,6 +38,7 @@ func load_file():
 		planet.name = section
 		planet.position = saveFile.get_value(section, 'position', Vector2(0, 0))
 		planet.motion = saveFile.get_value(section, 'motion', Vector2(0, 0))
+		planet.weight = saveFile.get_value(section, 'weight', 1)
 		## TODO ADD Other Properties
 
 
@@ -56,6 +56,7 @@ func save_file():
 	for object in get_tree().get_nodes_in_group('gravity_object'):
 		saveFile.set_value(object.name, 'position', object.position)
 		saveFile.set_value(object.name, 'motion', object.motion)
+		saveFile.set_value(object.name, 'weight', object.weight)
 		## TODO ADD Other Properties
 
 	saveFile.save(main_file_path)

@@ -31,7 +31,6 @@ func callback(id: int):
 	if item_text == 'Save':
 		EditorSaves.save_file()
 	if item_text == 'Exit':
-		EditorSaves.save_file()
 		EditorSaves.currentSaveName = ''
 		get_tree().change_scene_to_file(\"res://Scenes/User Interface/Main.tscn\")
 "
@@ -51,6 +50,9 @@ func _ready():
 func text_suggested(new_text: String):
 	if not new_text in EditorSaves.get_all_save_names() or EditorSaves.currentSaveName == new_text:
 		print(new_text)
+
+		## TODO Rename old SAave
+
 		EditorSaves.currentSaveName = new_text
 		release_focus()
 
@@ -239,11 +241,13 @@ layout_mode = 2
 
 [node name="Property Label" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_5tj81")]
 layout_mode = 2
+text = "PROPERTY LABEL"
 
 [node name="Property Editor Multiple" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
 layout_mode = 2
 
 [node name="Property Editor Single" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("7_yxhf3")]
+visible = false
 layout_mode = 2
 
 [node name="Objects" type="MarginContainer" parent="v/main/v-split/top-tabs"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://ewibxx882i4u"]
+
+[sub_resource type="GDScript" id="GDScript_ndwdf"]
+resource_name = "Property Setter Number"
+script/source = "extends HBoxContainer
+
+@onready var label = $Label
+@onready var spin_box = $SpinBox
+
+
+func _ready():
+	spin_box.value_changed.connect(callback)
+	EditorGlobal.anything_changed.connect(render)
+
+func render():
+	if not EditorGlobal.is_empty_selection():
+
+		if EditorGlobal.is_single_selection():
+			spin_box.value = EditorGlobal.get_selection()[0].weight
+		else:
+			spin_box.value = 0
+
+func callback(new_val):
+	EditorGlobal.set_weight_for_each_selected(new_val)
+"
+
+[node name="WeightSetter" type="HBoxContainer"]
+script = SubResource("GDScript_ndwdf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Weight"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 2
+min_value = 1.0
+value = 1.0

@@ -27,6 +27,15 @@ func _ready():
 
 	connect('selection_changed', callAnythingChanged)
 
+func is_empty_selection() -> bool:
+	return get_selection().size() == 0
+
+func is_single_selection() -> bool:
+	return get_selection().size() == 1
+
+func is_multi_selection() -> bool:
+	return get_selection().size() > 1
+
 func get_selection():
 	return selection
 
@@ -92,6 +101,14 @@ func move_selected_to(target_pos: Vector2):
 
 	for object in get_selection():
 		object.position += offset
+
+	anything_changed.emit()
+
+func set_weight_for_each_selected(weight: int):
+	print('Setting Weight to "%s"' % weight)
+	for object in get_selection():
+		object.weight = weight
+	anything_changed.emit()
 
 func stop_selected():
 	for object in get_selection():

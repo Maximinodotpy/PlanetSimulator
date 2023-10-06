@@ -66,7 +66,10 @@ size_flags_vertical = 3
 theme_override_constants/separation = 20
 script = SubResource("GDScript_6u0x5")
 
-[node name="Settings Button" type="Button" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="Settings Button" type="Button" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Settings"

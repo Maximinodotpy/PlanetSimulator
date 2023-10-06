@@ -137,6 +137,9 @@ func _on_sub_viewport_container_gui_input(event):
 
 	elif event is InputEventMouseButton:
 
+		if get_viewport().gui_get_focus_owner():
+			get_viewport().gui_get_focus_owner().release_focus()
+
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				isDragging = true
