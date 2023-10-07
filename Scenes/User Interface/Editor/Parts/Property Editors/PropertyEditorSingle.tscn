@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://tn815bk1ttbo"]
+[gd_scene load_steps=7 format=3 uid="uid://tn815bk1ttbo"]
 
 [ext_resource type="PackedScene" uid="uid://dxhwn4decf4gi" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Stats.tscn" id="1_eeflp"]
 [ext_resource type="PackedScene" uid="uid://bjrshu0bu4nev" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Position.tscn" id="1_sfrx1"]
 [ext_resource type="PackedScene" uid="uid://e1i3vtnbt73h" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Is Affected.tscn" id="1_snjyg"]
+[ext_resource type="PackedScene" uid="uid://g3bbiipsgq63" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Motion.tscn" id="2_4xuqb"]
 [ext_resource type="PackedScene" uid="uid://b215ntnknguk7" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Affects Others.tscn" id="2_q2cgi"]
 [ext_resource type="PackedScene" uid="uid://ewibxx882i4u" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Weight Setter.tscn" id="3_3wtko"]
 
@@ -14,6 +15,9 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Position" parent="editors" instance=ExtResource("1_sfrx1")]
+layout_mode = 2
+
+[node name="Motion" parent="editors" instance=ExtResource("2_4xuqb")]
 layout_mode = 2
 
 [node name="WeightSetter" parent="editors" instance=ExtResource("3_3wtko")]

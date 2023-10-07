@@ -1,5 +1,7 @@
 extends Control
 
+const MIN_SIMULATION_SPEED = 0.1
+const MAX_SIMULATION_SPEED = 100
 
 @onready var status_container = $v/bottom/h/status
 
@@ -70,7 +72,7 @@ func toolSwitched(button: Button = Button.new()):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	EditorGlobal.simulationSpeed = clampf(EditorGlobal.simulationSpeed, 0.1, 10)
+	EditorGlobal.simulationSpeed = clampf(EditorGlobal.simulationSpeed, MIN_SIMULATION_SPEED, MAX_SIMULATION_SPEED)
 
 	var selection_rect = EditorGlobal.get_selection_bounding_rect()
 
@@ -122,6 +124,12 @@ func _on_slower_button_pressed():
 func _on_faster_button_pressed():
 	EditorGlobal.simulationSpeed += 0.1
 
+func _on_slowest_button_pressed():
+	EditorGlobal.simulationSpeed = MIN_SIMULATION_SPEED
+
+func _on_fastest_button_pressed():
+	EditorGlobal.simulationSpeed = MAX_SIMULATION_SPEED
+
 
 func _on_sub_viewport_container_gui_input(event):
 	var mousePosition = space.get_global_mouse_position()
@@ -162,3 +170,5 @@ func _on_sub_viewport_container_gui_input(event):
 					currentToolScript.dragEnd(dragStart, mousePosition)
 
 				isDraggingSelection = false
+
+

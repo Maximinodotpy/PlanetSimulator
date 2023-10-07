@@ -17,7 +17,7 @@ func _process(delta):
 		return
 
 	for object in get_tree().get_nodes_in_group('gravity_object'):
-		if object == self:
+		if object == self or not object.affectsOthers:
 			continue
 
 		var distance = position.distance_to(object.position)
@@ -26,6 +26,15 @@ func _process(delta):
 		var theirMass = object.weight
 
 		const MASS_MULTIPLIER = 1_000_000
+
+		# Find out it if the Distance is less then their radi
+		if distance < weight * 5 + object.weight * 5:
+			if weight > object.weight:
+				weight += object.weight
+				object.queue_free()
+			else:
+				object.weight += weight
+				queue_free()
 
 		# Calculate gravitational force
 		var force = grav_force(myMass * MASS_MULTIPLIER, theirMass * MASS_MULTIPLIER, distance)
@@ -47,4 +56,4 @@ func grav_force(m1: float, m2: float, r: float) -> float:
 	return F
 
 func apply_motion(delta):
-	set_position(position + motion * delta)
+	set_position(position + motion * delta * EditorGlobal.simulationSpeed)

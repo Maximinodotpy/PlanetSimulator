@@ -22,10 +22,13 @@ func selected():
 	viewport.get_camera_2d().zoom = preCam.zoom
 
 func unselected():
-	spaceShipSceneInstance.queue_free()
+	if spaceShipSceneInstance:
+		spaceShipSceneInstance.queue_free()
 
-	viewport.get_camera_2d().enabled = false
+		preCam.position = spaceShipSceneInstance.position
+		preCam.zoom = viewport.get_camera_2d().zoom
+
+		viewport.get_camera_2d().enabled = false
+
 	preCam.enabled = true
 
-	preCam.position = spaceShipSceneInstance.position
-	preCam.zoom = viewport.get_camera_2d().zoom

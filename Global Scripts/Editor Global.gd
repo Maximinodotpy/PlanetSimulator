@@ -93,9 +93,10 @@ func get_selection_rect() -> Rect2:
 	var rect = Rect2()
 
 	if get_selection().size() > 0:
-		var firstItem: Node = get_selection()[0]
-		if firstItem:
-			rect.position = firstItem.position
+		if get_selection()[0]:
+			var firstItem: Node = get_selection()[0]
+			if firstItem:
+				rect.position = firstItem.position
 
 	for i in get_selection():
 		rect = rect.expand(i.position)
@@ -106,8 +107,9 @@ func get_selection_bounding_rect() -> Rect2:
 	var rect = Rect2()
 
 	if get_selection().size() > 0:
-		var firstItem = get_selection()[0]
-		rect.position = firstItem.position
+		if get_selection()[0]:
+			var firstItem = get_selection()[0]
+			rect.position = firstItem.position
 
 	for i in get_selection():
 		rect = rect.expand(i.position)

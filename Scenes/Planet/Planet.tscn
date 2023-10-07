@@ -18,7 +18,8 @@ func _ready():
 func _process(delta):
 	if get_tree().paused:
 		show()
-		points[1] = get_parent().motion
+		var indicator = get_parent().motion
+		points[1] = indicator
 	else:
 		hide()
 "

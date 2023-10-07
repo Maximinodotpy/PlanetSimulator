@@ -9,8 +9,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var visibleRectSize = EditorGlobal.get_space_viewport().get_visible_rect().size
+func _process(_delta):
 	var viewportTransform = get_viewport_transform()
 
 	var top = -viewportTransform.origin.y / viewportTransform.y.y
