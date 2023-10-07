@@ -5,7 +5,8 @@ func _init():
 	shortcut_key = KEY_P
 
 func selected():
-	viewport.get_camera_2d().continuePanzoom()
+	if viewport.get_camera_2d().has_method('continuePanzoom'):
+		viewport.get_camera_2d().continuePanzoom()
 
 func unselected():
 	viewport.get_camera_2d().pausePanzoom()

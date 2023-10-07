@@ -2,13 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="1_gifur"]
 [ext_resource type="PackedScene" uid="uid://dhrdbkvfafbq1" path="res://Scenes/User Interface/UI Template.tscn" id="1_osley"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0hx3"]
-bg_color = Color(0.278431, 0.278431, 0.278431, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="Texture2D" uid="uid://daogwyaq51yg0" path="res://Meta/splash_screen_icon.png" id="2_int6e"]
 
 [sub_resource type="GDScript" id="GDScript_6u0x5"]
 script/source = "extends VBoxContainer
@@ -29,13 +23,22 @@ func _ready():
 
 [node name="Main" instance=ExtResource("1_osley")]
 
+[node name="TextureRect" type="TextureRect" parent="." index="0"]
+layout_mode = 0
+offset_top = -640.0
+offset_right = 1920.0
+offset_bottom = 1280.0
+texture = ExtResource("2_int6e")
+
+[node name="ColorRect" parent="." index="1"]
+visible = false
+
 [node name="Label" parent="m/v" index="0"]
 text = "Planet Simulator"
 
 [node name="PanelContainer" type="PanelContainer" parent="m/v/VBoxContainer" index="0"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_n0hx3")
 
 [node name="MarginContainer" type="MarginContainer" parent="m/v/VBoxContainer/PanelContainer" index="0"]
 layout_mode = 2

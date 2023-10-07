@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsocfxao3rhf3"]
+
+[ext_resource type="PackedScene" uid="uid://crnb8umwfskq4" path="res://Scenes/Gravity Object/Gravity Object Template.tscn" id="1_4hy78"]
+[ext_resource type="Texture2D" uid="uid://dwet4j7mp8dmf" path="res://Meta/Screenshots/Screenshot 1.png" id="2_4xwal"]
+[ext_resource type="Script" path="res://Scenes/Space Ship/Space Ship.gd" id="2_qvskm"]
+
+[node name="Space Ship" instance=ExtResource("1_4hy78")]
+script = ExtResource("2_qvskm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.155224, 0.163889)
+texture = ExtResource("2_4xwal")
+
+[node name="Camera2D" type="Camera2D" parent="." index="1"]

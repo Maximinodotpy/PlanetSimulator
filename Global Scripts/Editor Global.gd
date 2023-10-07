@@ -198,7 +198,7 @@ func rename_object(object: Node2D, new_name: String):
 func get_space() -> Node2D:
 	return Helpers.getSceneRoot().find_children('space')[0]
 
-func get_space_viewport() -> SubViewport:
+func get_space_viewport() -> Viewport:
 	return Helpers.getSceneRoot().find_children('space_viewport')[0]
 
 func get_file_name_edit() -> LineEdit:

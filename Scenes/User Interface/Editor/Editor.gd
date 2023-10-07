@@ -11,7 +11,8 @@ extends Control
 var tools = [
 	preload("res://Scenes/User Interface/Editor/Tools/Move.gd").new(),
 	preload("res://Scenes/User Interface/Editor/Tools/Select.gd").new(),
-	preload("res://Scenes/User Interface/Editor/Tools/Create.gd").new()
+	preload("res://Scenes/User Interface/Editor/Tools/Create.gd").new(),
+	preload("res://Scenes/User Interface/Editor/Tools/Space Ship.gd").new()
 ]
 
 var currentTool = 0

@@ -5,7 +5,12 @@ func _ready():
 func callback(id: int):
 	var item_text = get_item_text(id)
 	if item_text == 'Save':
-		EditorSaves.save_file()
+
+		if EditorSaves.currentSaveName == '':
+			EditorGlobal.get_file_name_edit().grab_focus()
+		else:
+			EditorSaves.save_file()
+
 	if item_text == 'Exit':
 		EditorSaves.currentSaveName = ''
 		get_tree().change_scene_to_file("res://Scenes/User Interface/Main.tscn")

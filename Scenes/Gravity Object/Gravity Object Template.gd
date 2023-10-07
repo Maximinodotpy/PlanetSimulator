@@ -20,18 +20,31 @@ func _process(delta):
 		if object == self:
 			continue
 
-		var distanceSquared = position.distance_squared_to(object.position)
+		var distance = position.distance_to(object.position)
+		var direction = (self.position - object.position).normalized()
 		var myMass = self.weight
 		var theirMass = object.weight
 
-		motion += position.direction_to(object.position) * object.weight
+		const MASS_MULTIPLIER = 1_000_000
+
+		# Calculate gravitational force
+		var force = grav_force(myMass * MASS_MULTIPLIER, theirMass * MASS_MULTIPLIER, distance)
+
+		var acceleration = force / myMass
+
+		motion -= direction * acceleration * delta * EditorGlobal.simulationSpeed
+
+	frameReaction()
+
+func frameReaction():
+	pass
 
 # Calculate the gravitational force between 2 objects
-func grav_force(m1, m2, r):
-	# Newtons constant
-	var G = 6.674*(10**-11)
-	var formula = G * (m1 * m2 / r)
-	return formula
+func grav_force(m1: float, m2: float, r: float) -> float:
+	var G = 6.675e-11
+
+	var F = G * m1 * m2 / r**2
+	return F
 
 func apply_motion(delta):
-	set_position(position + motion * delta * EditorGlobal.simulationSpeed)
+	set_position(position + motion * delta)

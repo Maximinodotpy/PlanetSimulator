@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=35 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -447,6 +448,17 @@ handle_input_locally = false
 size = Vector2i(1573, 976)
 render_target_update_mode = 4
 
+[node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
+script = ExtResource("17_i2gys")
+
+[node name="X" type="Line2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/Origin Markers"]
+points = PackedVector2Array(0, 0, 0, 100)
+default_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[node name="Y" type="Line2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/Origin Markers"]
+points = PackedVector2Array(0, 0, 100, 0)
+default_color = Color(0.313726, 0.313726, 0.313726, 1)
+
 [node name="SelectedRect" type="Panel" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -458,26 +470,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ks2h5")
 process_mode = 3
 rotation_smoothing_enabled = true
 script = ExtResource("4_by8r2")
-
-[node name="origin_marker" type="Control" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
-modulate = Color(0, 0.45098, 0.454902, 1)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/origin_marker"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 8.0
-offset_bottom = 2441.0
-
-[node name="ColorRect2" type="ColorRect" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/origin_marker"]
-layout_mode = 0
-offset_top = 8.0
-offset_right = 16.0
-offset_bottom = 2449.0
-rotation = -1.57079
 
 [node name="bottom" type="MarginContainer" parent="v"]
 process_mode = 3
@@ -491,6 +483,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="slowest_button" type="Button" parent="v/bottom/h"]
+visible = false
 layout_mode = 2
 tooltip_text = "Slowest"
 focus_mode = 0
@@ -502,6 +495,7 @@ shortcut = SubResource("Shortcut_soh8f")
 icon = ExtResource("4_02nni")
 
 [node name="slower_button" type="Button" parent="v/bottom/h"]
+visible = false
 layout_mode = 2
 tooltip_text = "Slower"
 focus_mode = 0
@@ -523,6 +517,7 @@ shortcut = SubResource("Shortcut_kl61j")
 text = "Pause"
 
 [node name="faster_button" type="Button" parent="v/bottom/h"]
+visible = false
 layout_mode = 2
 tooltip_text = "Faster"
 focus_mode = 0
@@ -536,6 +531,7 @@ alignment = 0
 icon_alignment = 2
 
 [node name="fastest_button" type="Button" parent="v/bottom/h"]
+visible = false
 layout_mode = 2
 tooltip_text = "Fastest"
 focus_mode = 0
