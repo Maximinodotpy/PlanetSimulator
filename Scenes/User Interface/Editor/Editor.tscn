@@ -5,9 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Properties.gd" id="3_lsvst"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/FileMenu.gd" id="3_w3248"]
 [ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://Scenes/Space.tscn" id="3_wssg3"]
 [ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="4_by8r2"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/File Name Edit.gd" id="4_gsugx"]
 [ext_resource type="PackedScene" uid="uid://b36rnbp41eree" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Property Label.tscn" id="5_5tj81"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Quick Actions.gd" id="5_n7l7m"]
 [ext_resource type="PackedScene" uid="uid://ch2vv8qw1ictp" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorMultiple.tscn" id="5_n20wa"]
@@ -15,49 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
-
-[sub_resource type="GDScript" id="GDScript_1m1dd"]
-resource_name = "File Menu"
-script/source = "extends PopupMenu
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	index_pressed.connect(callback)
-
-func callback(id: int):
-	var item_text = get_item_text(id)
-
-	if item_text == 'Save':
-		EditorSaves.save_file()
-	if item_text == 'Exit':
-		EditorSaves.currentSaveName = ''
-		get_tree().change_scene_to_file(\"res://Scenes/User Interface/Main.tscn\")
-"
-
-[sub_resource type="GDScript" id="GDScript_m62k6"]
-resource_name = "File Name Edit"
-script/source = "extends LineEdit
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	text = EditorSaves.currentSaveName
-
-	text_submitted.connect(text_suggested)
-
-
-func text_suggested(new_text: String):
-	if not new_text in EditorSaves.get_all_save_names() or EditorSaves.currentSaveName == new_text:
-		print(new_text)
-
-		## TODO Rename old SAave
-
-		EditorSaves.currentSaveName = new_text
-		release_focus()
-
-
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -175,7 +134,7 @@ item_0/text = "Save"
 item_0/id = 2
 item_1/text = "Exit"
 item_1/id = 1
-script = SubResource("GDScript_1m1dd")
+script = ExtResource("3_w3248")
 
 [node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
 item_count = 1
@@ -213,7 +172,7 @@ placeholder_text = "File Name"
 alignment = 1
 expand_to_text_length = true
 flat = true
-script = SubResource("GDScript_m62k6")
+script = ExtResource("4_gsugx")
 
 [node name="main" type="HSplitContainer" parent="v"]
 layout_mode = 2
