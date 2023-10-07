@@ -36,12 +36,28 @@ func is_single_selection() -> bool:
 func is_multi_selection() -> bool:
 	return get_selection().size() > 1
 
+func is_all_selected() -> bool:
+	return get_selection().size() == get_all_objects().size()
+
+func is_there_objects() -> bool:
+	return get_all_objects().size() != 0
+
 func get_selection():
 	return selection
 
 func select_all():
 	for object in get_tree().get_nodes_in_group('gravity_object'):
 		add_to_selection(object)
+	selection_changed.emit()
+
+func add_one_random_to_selection():
+	var objects = get_all_objects()
+
+	if objects.size() > 0:
+		var randomIndex = randi() % objects.size()
+		add_to_selection(objects[randomIndex])
+
+	selection_changed.emit()
 
 func add_to_selection(node: Node):
 	if node not in get_selection():
@@ -51,6 +67,20 @@ func add_to_selection(node: Node):
 
 func clear_selection():
 	selection.clear()
+
+	selection_changed.emit()
+
+func inverse_selection():
+	var newSel = []
+
+	for other_object in get_tree().get_nodes_in_group('gravity_object'):
+		if other_object not in get_selection():
+			newSel.append(other_object)
+
+	clear_selection()
+
+	for object in newSel:
+		add_to_selection(object)
 
 	selection_changed.emit()
 
@@ -171,5 +201,8 @@ func get_space() -> Node2D:
 func get_space_viewport() -> SubViewport:
 	return Helpers.getSceneRoot().find_children('space_viewport')[0]
 
+func get_file_name_edit() -> LineEdit:
+	return Helpers.getSceneRoot().find_children('File Name Edit')[0]
 
-
+func get_all_objects():
+	return get_tree().get_nodes_in_group('gravity_object')
