@@ -4,20 +4,20 @@
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
 [ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/FileMenu.gd" id="3_hu768"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Properties.gd" id="3_lsvst"]
-[ext_resource type="Script" path="res://Scenes/User Interface/Editor/FileMenu.gd" id="3_w3248"]
 [ext_resource type="PackedScene" uid="uid://dgy8xkpbvycv7" path="res://Scenes/Space.tscn" id="3_wssg3"]
 [ext_resource type="Texture2D" uid="uid://bwkwtv4whnhlj" path="res://Scenes/User Interface/Editor/Icons/snail.svg" id="4_02nni"]
-[ext_resource type="Script" path="res://Scenes/User Interface/Editor/EditMenu.gd" id="4_4j5ki"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/EditMenu.gd" id="4_bjq2a"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Panzoom Camera/panzoom_camera.gd" id="4_by8r2"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/File Name Edit.gd" id="4_gsugx"]
-[ext_resource type="Script" path="res://Scenes/User Interface/Editor/SelectionMenu.gd" id="5_4fqeg"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/SelectionMenu.gd" id="5_5l7k4"]
 [ext_resource type="PackedScene" uid="uid://b36rnbp41eree" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Property Label.tscn" id="5_5tj81"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Quick Actions.gd" id="5_n7l7m"]
 [ext_resource type="PackedScene" uid="uid://ch2vv8qw1ictp" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorMultiple.tscn" id="5_n20wa"]
 [ext_resource type="Texture2D" uid="uid://cqc7hgdtjho4w" path="res://Scenes/User Interface/Editor/Icons/move-left.svg" id="5_oq7qi"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/ViewMenu.gd" id="6_6hkty"]
 [ext_resource type="Texture2D" uid="uid://b1rdkesmmvwaa" path="res://Scenes/User Interface/Editor/Icons/move-right.svg" id="6_6v10q"]
-[ext_resource type="Script" path="res://Scenes/User Interface/Editor/ViewMenu.gd" id="6_koj6b"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 
@@ -137,17 +137,17 @@ item_0/text = "Save"
 item_0/id = 2
 item_1/text = "Exit"
 item_1/id = 1
-script = ExtResource("3_w3248")
+script = ExtResource("3_hu768")
 
 [node name="Edit" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
-script = ExtResource("4_4j5ki")
+script = ExtResource("4_bjq2a")
 
 [node name="Selection" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
-script = ExtResource("5_4fqeg")
+script = ExtResource("5_5l7k4")
 
 [node name="View" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
 size = Vector2i(308, 132)
-script = ExtResource("6_koj6b")
+script = ExtResource("6_6hkty")
 
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer"]
 layout_mode = 2
