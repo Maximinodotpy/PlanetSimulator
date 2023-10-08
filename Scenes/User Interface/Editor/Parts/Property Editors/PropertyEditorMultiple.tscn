@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch2vv8qw1ictp"]
+[gd_scene load_steps=5 format=3 uid="uid://ch2vv8qw1ictp"]
 
+[ext_resource type="PackedScene" uid="uid://bjrshu0bu4nev" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Position.tscn" id="1_6jime"]
 [ext_resource type="PackedScene" uid="uid://b215ntnknguk7" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Affects Others.tscn" id="1_plwdc"]
 [ext_resource type="PackedScene" uid="uid://e1i3vtnbt73h" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Is Affected.tscn" id="2_mk72k"]
 [ext_resource type="PackedScene" uid="uid://dxhwn4decf4gi" path="res://Scenes/User Interface/Editor/Parts/Property Editors/Property Editor Parts/Stats.tscn" id="3_qmqff"]
@@ -7,10 +8,15 @@
 [node name="multiple" type="VBoxContainer"]
 theme_override_constants/separation = 10
 
+[node name="Position" parent="." instance=ExtResource("1_6jime")]
+layout_mode = 2
+
 [node name="Affects Other" parent="." instance=ExtResource("1_plwdc")]
+visible = false
 layout_mode = 2
 
 [node name="Is Affected" parent="." instance=ExtResource("2_mk72k")]
+visible = false
 layout_mode = 2
 
 [node name="stats" parent="." instance=ExtResource("3_qmqff")]

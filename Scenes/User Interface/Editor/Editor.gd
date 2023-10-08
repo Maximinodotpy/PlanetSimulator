@@ -1,8 +1,5 @@
 extends Control
 
-const MIN_SIMULATION_SPEED = 1
-const MAX_SIMULATION_SPEED = 100
-
 @onready var status_container = $v/bottom/h/status
 
 @onready var spaceViewport = EditorGlobal.get_space_viewport()
@@ -25,6 +22,9 @@ var isDraggingSelection = false
 func _ready():
 	if EditorSaves.currentSaveName != '':
 		EditorSaves.load_file()
+
+	EditorGlobal.reset_simulation_speed()
+	EditorGlobal.pause_simulation()
 
 	# Create Tools
 	var buttonGroup = ButtonGroup.new()
@@ -72,7 +72,11 @@ func toolSwitched(button: Button = Button.new()):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	EditorGlobal.simulationSpeed = clampf(EditorGlobal.simulationSpeed, MIN_SIMULATION_SPEED, MAX_SIMULATION_SPEED)
+
+	if get_tree().paused:
+		$v/bottom/h/pause_button.text = 'Continue'
+	else:
+		$v/bottom/h/pause_button.text = 'Pause'
 
 	var selection_rect = EditorGlobal.get_selection_bounding_rect()
 
@@ -92,7 +96,7 @@ func _process(delta):
 
 		addStatus('Camera Zoom: %s%%' % [ round(camZoom * 100) ])
 
-	addStatus('Planets: %s' % get_tree().get_nodes_in_group('gravity_object').size())
+	addStatus('Planets: %s' % EditorGlobal.get_all_objects().size())
 
 	addStatus('Selected Planets: %s' % EditorGlobal.get_selection().size())
 
@@ -112,23 +116,18 @@ func addStatus(text):
 func _on_pause_button_pressed():
 	get_tree().paused = !get_tree().paused
 
-	if get_tree().paused:
-		$v/bottom/h/pause_button.text = 'Continue'
-	else:
-		$v/bottom/h/pause_button.text = 'Pause'
-
 
 func _on_slower_button_pressed():
-	EditorGlobal.simulationSpeed -= 1
+	EditorGlobal.set_simulation_speed(EditorGlobal.simulationSpeed - 1)
 
 func _on_faster_button_pressed():
-	EditorGlobal.simulationSpeed += 1
+	EditorGlobal.set_simulation_speed(EditorGlobal.simulationSpeed + 1)
 
 func _on_slowest_button_pressed():
-	EditorGlobal.simulationSpeed = MIN_SIMULATION_SPEED
+	EditorGlobal.simulation_slowest()
 
 func _on_fastest_button_pressed():
-	EditorGlobal.simulationSpeed = MAX_SIMULATION_SPEED
+	EditorGlobal.simulation_fastest()
 
 
 func _on_sub_viewport_container_gui_input(event):

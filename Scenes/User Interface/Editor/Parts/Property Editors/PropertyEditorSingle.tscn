@@ -24,9 +24,11 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Is Affected" parent="editors" instance=ExtResource("1_snjyg")]
+visible = false
 layout_mode = 2
 
 [node name="affects_others_hbox" parent="editors" instance=ExtResource("2_q2cgi")]
+visible = false
 layout_mode = 2
 
 [node name="stats" parent="." instance=ExtResource("1_eeflp")]

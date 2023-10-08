@@ -3,7 +3,12 @@ extends Node
 ## Global Editor Functions for the Selection and Loading Files
 
 var selection = []
+
 var simulationSpeed: int = 1
+
+const MIN_SIMULATION_SPEED = 1
+const DEFAULT_SIMULATION_SPEED = 10
+const MAX_SIMULATION_SPEED = 250
 
 var planetScene = preload("res://Scenes/Planet/Planet.tscn")
 
@@ -22,10 +27,10 @@ enum OBJECT_TYPES {
 
 
 func _ready():
-	var callAnythingChanged = func():
-		anything_changed.emit()
-
 	connect('selection_changed', callAnythingChanged)
+
+func callAnythingChanged():
+	anything_changed.emit()
 
 func is_empty_selection() -> bool:
 	return get_selection().size() == 0
@@ -67,7 +72,6 @@ func add_to_selection(node: Node):
 
 func clear_selection():
 	selection.clear()
-
 	selection_changed.emit()
 
 func inverse_selection():
@@ -208,3 +212,36 @@ func get_file_name_edit() -> LineEdit:
 
 func get_all_objects():
 	return get_tree().get_nodes_in_group('gravity_object')
+
+
+func get_simulation_speed() -> int:
+	return simulationSpeed
+
+func set_simulation_speed(speed: int):
+	simulationSpeed = clamp(speed, MIN_SIMULATION_SPEED, MAX_SIMULATION_SPEED)
+	anything_changed.emit()
+
+func reset_simulation_speed():
+	simulationSpeed = DEFAULT_SIMULATION_SPEED
+
+func is_simulation_slowest() -> bool:
+	return simulationSpeed == MIN_SIMULATION_SPEED
+
+func is_simulation_fastest() -> bool:
+	return simulationSpeed == MAX_SIMULATION_SPEED
+
+func pause_simulation():
+	get_tree().paused = true
+	anything_changed.emit()
+
+func resume_simulation():
+	get_tree().paused = false
+	anything_changed.emit()
+
+func simulation_fastest():
+	simulationSpeed = MAX_SIMULATION_SPEED
+	anything_changed.emit()
+
+func simulation_slowest():
+	simulationSpeed = MIN_SIMULATION_SPEED
+	anything_changed.emit()

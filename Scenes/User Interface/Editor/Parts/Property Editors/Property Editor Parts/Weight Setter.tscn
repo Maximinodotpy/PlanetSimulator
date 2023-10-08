@@ -16,9 +16,9 @@ func render():
 	if not EditorGlobal.is_empty_selection():
 
 		if EditorGlobal.is_single_selection():
-			spin_box.value = EditorGlobal.get_selection()[0].weight
+			spin_box.set_value_no_signal(EditorGlobal.get_selection()[0].weight)
 		else:
-			spin_box.value = 0
+			spin_box.set_value_no_signal(0)
 
 func callback(new_val):
 	EditorGlobal.set_weight_for_each_selected(new_val)
