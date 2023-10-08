@@ -449,7 +449,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1308, 976)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
