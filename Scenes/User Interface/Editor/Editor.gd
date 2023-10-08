@@ -1,6 +1,6 @@
 extends Control
 
-const MIN_SIMULATION_SPEED = 0.1
+const MIN_SIMULATION_SPEED = 1
 const MAX_SIMULATION_SPEED = 100
 
 @onready var status_container = $v/bottom/h/status
@@ -98,7 +98,7 @@ func _process(delta):
 
 	addStatus('FPS: %s' % Performance.get_monitor(Performance.TIME_FPS))
 
-	addStatus('Simulation Speed: %s%%' % [ EditorGlobal.simulationSpeed * 100 ])
+	addStatus('Simulation Speed: %s Step(s) Per Frame' % [ EditorGlobal.simulationSpeed ])
 
 
 
@@ -119,10 +119,10 @@ func _on_pause_button_pressed():
 
 
 func _on_slower_button_pressed():
-	EditorGlobal.simulationSpeed -= 0.1
+	EditorGlobal.simulationSpeed -= 1
 
 func _on_faster_button_pressed():
-	EditorGlobal.simulationSpeed += 0.1
+	EditorGlobal.simulationSpeed += 1
 
 func _on_slowest_button_pressed():
 	EditorGlobal.simulationSpeed = MIN_SIMULATION_SPEED

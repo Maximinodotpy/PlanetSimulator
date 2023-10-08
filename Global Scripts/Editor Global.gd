@@ -3,7 +3,7 @@ extends Node
 ## Global Editor Functions for the Selection and Loading Files
 
 var selection = []
-var simulationSpeed = 1
+var simulationSpeed: int = 1
 
 var planetScene = preload("res://Scenes/Planet/Planet.tscn")
 
@@ -93,7 +93,7 @@ func get_selection_rect() -> Rect2:
 	var rect = Rect2()
 
 	if get_selection().size() > 0:
-		if get_selection()[0]:
+		if not get_selection()[0].is_queued_for_deletion():
 			var firstItem: Node = get_selection()[0]
 			if firstItem:
 				rect.position = firstItem.position
@@ -107,7 +107,7 @@ func get_selection_bounding_rect() -> Rect2:
 	var rect = Rect2()
 
 	if get_selection().size() > 0:
-		if get_selection()[0]:
+		if not get_selection()[0].is_queued_for_deletion():
 			var firstItem = get_selection()[0]
 			rect.position = firstItem.position
 
@@ -181,7 +181,7 @@ func remove_object(node: Node2D):
 	node.free()
 	anything_changed.emit()
 
-func add_object(type: OBJECT_TYPES):
+func add_object(_type: OBJECT_TYPES):
 	print('Adding Planet')
 
 	var grav_obj: Planet = planetScene.instantiate()

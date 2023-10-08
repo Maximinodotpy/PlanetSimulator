@@ -20,25 +20,25 @@ func unselected():
 	pass
 
 ##
-func dragStart(startPos: Vector2):
+func dragStart(_startPos: Vector2):
 	pass
 
 ##
-func dragging(startPos: Vector2, currentPos: Vector2):
+func dragging(_startPos: Vector2, _currentPos: Vector2):
 	pass
 
 ##
-func dragEnd(startPos: Vector2, endPos: Vector2):
+func dragEnd(_startPos: Vector2, _endPos: Vector2):
 	pass
 
 ##
-func selectionDragStart(startPos: Vector2):
+func selectionDragStart(_startPos: Vector2):
 	pass
 
 ##
-func selectionDragging(startPos: Vector2, currentPos: Vector2):
+func selectionDragging(_startPos: Vector2, _currentPos: Vector2):
 	pass
 
 ##
-func selectionDragEnd(startPos: Vector2, endPos: Vector2):
+func selectionDragEnd(_startPos: Vector2, _endPos: Vector2):
 	pass

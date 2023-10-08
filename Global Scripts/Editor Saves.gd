@@ -14,11 +14,11 @@ func get_all_save_names():
 	var dir = DirAccess.get_directories_at(savesDir)
 	return dir
 
-func delete_save(name: String):
-	return OS.move_to_trash(ProjectSettings.globalize_path(savesDir + '/' + name))
+func delete_save(save_name: String):
+	return OS.move_to_trash(ProjectSettings.globalize_path(savesDir + '/' + save_name))
 
-func is_save_name_valid(name: String):
-	if name == '':
+func is_save_name_valid(save_name: String):
+	if save_name == '':
 		return false
 
 func get_save_dir(save_name):

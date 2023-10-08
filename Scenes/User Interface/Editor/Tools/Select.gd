@@ -21,6 +21,7 @@ func selected():
 	viewport.add_child(selectBox)
 
 func dragStart(startPos):
+	print('Selection Started')
 	selectBox.position = startPos
 
 func dragging(startPos, currentPos):
