@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Selected Rect.gd" id="17_iv4k2"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Status.gd" id="20_6q2s3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Time Controls.gd" id="20_08kx2"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Saving Overlay.gd" id="26_j4d5s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -60,14 +61,6 @@ unicode = 115
 [sub_resource type="Shortcut" id="Shortcut_ejxwk"]
 events = [SubResource("InputEventKey_aihca")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_8kbvp"]
-device = -1
-keycode = 32
-unicode = 32
-
-[sub_resource type="Shortcut" id="Shortcut_kl61j"]
-events = [SubResource("InputEventKey_8kbvp")]
-
 [sub_resource type="InputEventKey" id="InputEventKey_84my0"]
 device = -1
 keycode = 68
@@ -89,6 +82,9 @@ bg_color = Color(0.352941, 0.352941, 0.352941, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdykt"]
 bg_color = Color(0, 0.462745, 0.819608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lk4bm"]
+bg_color = Color(0, 0, 0, 0.572549)
 
 [node name="main" type="Control"]
 process_mode = 3
@@ -143,11 +139,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="File" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
-item_count = 2
-item_0/text = "Save"
-item_0/id = 2
-item_1/text = "Exit"
-item_1/id = 1
 script = ExtResource("3_hu768")
 
 [node name="Edit" type="PopupMenu" parent="v/top/HBoxContainer/MenuBar"]
@@ -284,7 +275,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1308, 960)
+size = Vector2i(1308, 966)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
@@ -359,7 +350,6 @@ theme_override_constants/outline_size = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_y1x8m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
-shortcut = SubResource("Shortcut_kl61j")
 text = "Pause"
 
 [node name="faster_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
@@ -405,6 +395,25 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 30
 alignment = 2
 script = ExtResource("20_6q2s3")
+
+[node name="Saving Overlay" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lk4bm")
+script = ExtResource("26_j4d5s")
+
+[node name="c" type="CenterContainer" parent="Saving Overlay"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Saving Overlay/c"]
+layout_mode = 2
+text = "Saving File"
+horizontal_alignment = 1
 
 [connection signal="gui_input" from="v/main/SpaceContainer/SubViewportContainer" to="v/top/HBoxContainer/tools/tools" method="sub_viewport_container_gui_input"]
 [connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/slowest_button" to="v/bottom/h/Time Controls" method="slowest"]

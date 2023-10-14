@@ -7,6 +7,9 @@ const mainFileName = 'planets.cfg'
 
 const snapShotSubDir = 'snapshots'
 
+signal started_saving
+signal finished_saving
+
 func get_all_saves():
 	pass
 
@@ -60,6 +63,15 @@ func save_file():
 		## TODO ADD Other Properties
 
 	saveFile.save(main_file_path)
+
+
+	var timer = get_tree().create_timer(0.1)
+
+	var cb = func():
+		print('Saving Finished')
+		finished_saving.emit()
+
+	timer.timeout.connect(cb)
 
 
 

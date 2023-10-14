@@ -255,6 +255,20 @@ func createStyleBox(color: Color):
 	styleBox.bg_color = color
 	return styleBox
 
+func createShortcut(letter: int, ctrl: bool = false, shift: bool = false):
+	var shortcut = Shortcut.new()
+
+	var inputEvent = InputEventKey.new()
+
+	inputEvent.ctrl_pressed = ctrl
+	inputEvent.shift_pressed = shift
+
+	inputEvent.keycode = letter
+
+	shortcut.events = [ inputEvent ]
+
+	return shortcut
+
 func focusObject(node: Node2D):
 	focused_object = node
 	anything_changed.emit()
@@ -262,3 +276,6 @@ func focusObject(node: Node2D):
 func getFocusedObject():
 	return focused_object
 
+func unfocus():
+	focused_object = null
+	anything_changed.emit()

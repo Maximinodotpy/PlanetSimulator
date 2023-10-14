@@ -6,6 +6,8 @@ const PAUSE_INDEX = 0
 const RESUME = 'Resume'
 const RESUME_INDEX = 1
 
+var TIME_TOGGLE_SHORTCUT = EditorGlobal.createShortcut(KEY_SPACE)
+
 const RESET_SIMULATION_SPEED = 'Reset Simulation Speed'
 const RESET_SIMULATION_SPEED_INDEX = 2
 
@@ -25,7 +27,10 @@ const FASTEST_SIMULATION_SPEED_INDEX = 6
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_item(PAUSE, PAUSE_INDEX)
+	set_item_shortcut(PAUSE_INDEX, TIME_TOGGLE_SHORTCUT)
+
 	add_item(RESUME, RESUME_INDEX)
+	set_item_shortcut(RESUME_INDEX, TIME_TOGGLE_SHORTCUT)
 
 	add_separator('Simulation Speed')
 

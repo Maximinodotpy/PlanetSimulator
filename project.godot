@@ -38,7 +38,6 @@ enabled=PackedStringArray()
 [gui]
 
 theme/custom="res://Theme/Theme.tres"
-theme/custom_font="res://Theme/Font/Abel/Abel-Regular.ttf"
 
 [rendering]
 

@@ -2,12 +2,15 @@ extends PopupMenu
 
 const SELECT_ALL = 'Select All'
 const SELECT_ALL_INDEX = 0
+var SELECT_ALL_SHORTCUT = EditorGlobal.createShortcut(KEY_A, true)
 
 const INVERSE_SELECTION = 'Inverse Selection'
 const INVERSE_SELECTION_INDEX = 1
+var INVERSE_SELECTION_SHORTCUT = EditorGlobal.createShortcut(KEY_I, true, true)
 
 const UNSELECT_ALL = 'Unselect All'
 const UNSELECT_ALL_INDEX = 2
+var UNSELECT_ALL_SHORTCUT = EditorGlobal.createShortcut(KEY_D, true)
 
 const RANDOM = 'Random'
 const RANDOM_INDEX = 3
@@ -21,8 +24,13 @@ const SELECT_MANY_RANDOMLY_INDEX = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_item(SELECT_ALL, SELECT_ALL_INDEX)
+	set_item_shortcut(SELECT_ALL_INDEX, SELECT_ALL_SHORTCUT)
+
 	add_item(INVERSE_SELECTION, INVERSE_SELECTION_INDEX)
+	set_item_shortcut(INVERSE_SELECTION_INDEX, INVERSE_SELECTION_SHORTCUT)
+
 	add_item(UNSELECT_ALL, UNSELECT_ALL_INDEX)
+	set_item_shortcut(UNSELECT_ALL_INDEX, UNSELECT_ALL_SHORTCUT)
 
 	add_separator(RANDOM, RANDOM_INDEX)
 
