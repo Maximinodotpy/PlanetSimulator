@@ -1,22 +1,25 @@
 extends "res://Scenes/User Interface/Editor/Tools/Tool Template.gd"
 
-var selectBox: ColorRect
+var selectBox: Panel
 var currenSelectionRect = Rect2(0,0,0,0)
 var moveOffset : Vector2
 
 func _init():
 	tool_name = 'Select'
 	shortcut_key = KEY_V
+	tool_icon = preload("res://Theme/Icons/mouse-pointer-square-dashed.svg")
 
 func selected():
-	selectBox = ColorRect.new()
+	selectBox = Panel.new()
+
+	selectBox.add_theme_stylebox_override('panel', EditorGlobal.createStyleBox(
+		Color(0.45191067457199, 0.47775673866272, 0.60222572088242, 0.74117648601532)
+	))
 
 	selectBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	selectBox.size = Vector2(0, 0)
 	selectBox.position = Vector2(0, 0)
-
-	selectBox.color = Color(0.20392157137394, 0.21960784494877, 0.29803922772408, 0.74117648601532)
 
 	viewport.add_child(selectBox)
 

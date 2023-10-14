@@ -38,7 +38,12 @@ func _ready():
 		button.toggle_mode = true
 		button.button_group = buttonGroup
 		button.text = tool.tool_name
+		button.tooltip_text = tool.tool_name
 		button.focus_mode = Control.FOCUS_NONE
+
+		button.add_theme_constant_override('h_separation', 10)
+
+		button.icon = tool.tool_icon
 
 		if tool.shortcut_key:
 			var shortcut = Shortcut.new()

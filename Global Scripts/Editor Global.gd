@@ -245,3 +245,12 @@ func simulation_fastest():
 func simulation_slowest():
 	simulationSpeed = MIN_SIMULATION_SPEED
 	anything_changed.emit()
+
+func createStyleBox(color: Color):
+	var styleBox = StyleBoxFlat.new()
+	styleBox.set_border_width_all(2)
+	styleBox.border_color = color.darkened(0.3)
+	styleBox.bg_color = color
+	return styleBox
+
+

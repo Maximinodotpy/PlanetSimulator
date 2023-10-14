@@ -6,6 +6,7 @@ var preCam: Camera2D
 
 func _init():
 	tool_name = 'Space Ship'
+	tool_icon = preload("res://Theme/Icons/rocket.svg")
 
 func selected():
 	EditorGlobal.clear_selection()

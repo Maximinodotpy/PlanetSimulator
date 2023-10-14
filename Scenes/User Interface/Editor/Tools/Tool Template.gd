@@ -3,6 +3,7 @@ extends Button
 var viewport: Viewport
 var tool_name: String = ''
 var shortcut_key = ''
+var tool_icon
 
 ##
 func clicked():

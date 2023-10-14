@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cevt1u6tgo5bs"]
+[gd_scene load_steps=7 format=3 uid="uid://cevt1u6tgo5bs"]
 
 [ext_resource type="PackedScene" uid="uid://crnb8umwfskq4" path="res://Scenes/Gravity Object/Gravity Object Template.tscn" id="1_v4h3w"]
 [ext_resource type="Script" path="res://Scenes/Planet/Planet.gd" id="2_bcnq5"]
 [ext_resource type="Script" path="res://Scenes/Planet/planet_sprite.gd" id="2_sjp1w"]
-[ext_resource type="Texture2D" uid="uid://cjc1lj1yit4a0" path="res://addons/godot_helpers/Nodes/Settings View/settings view icon.svg" id="4_sflnm"]
+[ext_resource type="Script" path="res://Scenes/Planet/Tracer.gd" id="5_aqox8"]
 
 [sub_resource type="GDScript" id="GDScript_n8yle"]
 script/source = "extends Line2D
@@ -24,21 +24,28 @@ func _process(delta):
 		hide()
 "
 
+[sub_resource type="Curve" id="Curve_axoup"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="gravity object" instance=ExtResource("1_v4h3w")]
 script = ExtResource("2_bcnq5")
 
-[node name="Line2D" type="Line2D" parent="." index="0"]
+[node name="Direction Indicator" type="Line2D" parent="." index="0"]
 process_mode = 3
 points = PackedVector2Array(0, 0, 1, 0)
 width = 5.0
 default_color = Color(1, 0.552941, 1, 1)
 script = SubResource("GDScript_n8yle")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+[node name="Tracer" type="Line2D" parent="." index="1"]
+top_level = true
+z_index = -10
+width = 2.0
+width_curve = SubResource("Curve_axoup")
+default_color = Color(0, 0.396078, 0.756863, 1)
+script = ExtResource("5_aqox8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 scale = Vector2(0.01, 0.01)
 script = ExtResource("2_sjp1w")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." index="2"]
-visible = false
-modulate = Color(1, 1, 1, 0.0666667)
-texture = ExtResource("4_sflnm")

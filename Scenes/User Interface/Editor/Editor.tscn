@@ -161,6 +161,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 30
 
 [node name="Tools Label" type="Label" parent="v/top/HBoxContainer/tools"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tools"
@@ -168,6 +169,7 @@ vertical_alignment = 1
 
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="filename" type="Label" parent="v/top"]
 visible = false
@@ -449,7 +451,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1308, 976)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]

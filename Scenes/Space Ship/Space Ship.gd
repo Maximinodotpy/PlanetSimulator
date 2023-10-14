@@ -1,8 +1,6 @@
 extends "res://Scenes/Gravity Object/Gravity Object Template.gd"
 
 func frameReaction():
-	print('Hallo')
-
 	if Input.is_key_pressed(KEY_LEFT):
 		rotation_degrees -= 5
 	if Input.is_key_pressed(KEY_RIGHT):
