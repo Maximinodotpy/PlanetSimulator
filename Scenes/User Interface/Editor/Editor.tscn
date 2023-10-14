@@ -1,8 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=38 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
-[ext_resource type="Texture2D" uid="uid://dcjyps6cgx1pv" path="res://Meta/icon.svg" id="2_hnc5i"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Objects.gd" id="3_8avdp"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/FileMenu.gd" id="3_hu768"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Properties.gd" id="3_lsvst"]
@@ -21,7 +20,10 @@
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/MenuScripts/TimeMenu.gd" id="6_shhdd"]
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Tools.gd" id="8_p7biu"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Status.gd" id="20_6q2s3"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Time Controls.gd" id="20_08kx2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
 bg_color = Color(0.929412, 0.384314, 0.576471, 0.392157)
@@ -170,6 +172,7 @@ vertical_alignment = 1
 [node name="tools" type="HBoxContainer" parent="v/top/HBoxContainer/tools"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("8_p7biu")
 
 [node name="filename" type="Label" parent="v/top"]
 visible = false
@@ -255,183 +258,6 @@ script = ExtResource("5_n7l7m")
 [node name="h-flow" type="HFlowContainer" parent="v/main/v-split/bottom-tabs/Quick Actions"]
 layout_mode = 2
 
-[node name="Snapshots" type="MarginContainer" parent="v/main/v-split/bottom-tabs"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="v" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="h" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v"]
-layout_mode = 2
-
-[node name="search" type="LineEdit" parent="v/main/v-split/bottom-tabs/Snapshots/v/h"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Search"
-
-[node name="create_button" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/h"]
-layout_mode = 2
-text = "Create"
-
-[node name="scroll" type="ScrollContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="snap_shot_list" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="item" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="preview" type="TextureRect" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-texture = ExtResource("2_hnc5i")
-expand_mode = 1
-
-[node name="v" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item/v"]
-layout_mode = 2
-text = "Start"
-
-[node name="actions" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item/v"]
-layout_mode = 2
-
-[node name="Go To" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Go To"
-
-[node name="Button" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Delete"
-
-[node name="Duplicate" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Duplicate"
-
-[node name="item2" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="preview" type="TextureRect" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-texture = ExtResource("2_hnc5i")
-expand_mode = 1
-
-[node name="v" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2/v"]
-layout_mode = 2
-text = "Start"
-
-[node name="actions" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2/v"]
-layout_mode = 2
-
-[node name="Go To" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Go To"
-
-[node name="Button" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Delete"
-
-[node name="Duplicate" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item2/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Duplicate"
-
-[node name="item3" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="preview" type="TextureRect" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-texture = ExtResource("2_hnc5i")
-expand_mode = 1
-
-[node name="v" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3/v"]
-layout_mode = 2
-text = "Start"
-
-[node name="actions" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3/v"]
-layout_mode = 2
-
-[node name="Go To" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Go To"
-
-[node name="Button" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Delete"
-
-[node name="Duplicate" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item3/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Duplicate"
-
-[node name="item4" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="preview" type="TextureRect" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-texture = ExtResource("2_hnc5i")
-expand_mode = 1
-
-[node name="v" type="VBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4/v"]
-layout_mode = 2
-text = "Start"
-
-[node name="actions" type="HBoxContainer" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4/v"]
-layout_mode = 2
-
-[node name="Go To" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Go To"
-
-[node name="Button" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Delete"
-
-[node name="Duplicate" type="Button" parent="v/main/v-split/bottom-tabs/Snapshots/v/scroll/snap_shot_list/item4/v/actions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Duplicate"
-
 [node name="SpaceContainer" type="PanelContainer" parent="v/main"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -455,6 +281,7 @@ size = Vector2i(1308, 976)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
+z_index = -11
 script = ExtResource("17_i2gys")
 
 [node name="X" type="Line2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport/Origin Markers"]
@@ -488,7 +315,11 @@ theme_override_constants/margin_bottom = 10
 [node name="h" type="HBoxContainer" parent="v/bottom"]
 layout_mode = 2
 
-[node name="slowest_button" type="Button" parent="v/bottom/h"]
+[node name="Time Controls" type="HBoxContainer" parent="v/bottom/h"]
+layout_mode = 2
+script = ExtResource("20_08kx2")
+
+[node name="slowest_button" type="Button" parent="v/bottom/h/Time Controls"]
 layout_mode = 2
 tooltip_text = "Slowest"
 focus_mode = 0
@@ -499,7 +330,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_soh8f")
 icon = ExtResource("4_02nni")
 
-[node name="slower_button" type="Button" parent="v/bottom/h"]
+[node name="slower_button" type="Button" parent="v/bottom/h/Time Controls"]
 layout_mode = 2
 tooltip_text = "Slower"
 focus_mode = 0
@@ -510,7 +341,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_ejxwk")
 icon = ExtResource("5_oq7qi")
 
-[node name="pause_button" type="Button" parent="v/bottom/h"]
+[node name="pause_button" type="Button" parent="v/bottom/h/Time Controls"]
 layout_mode = 2
 focus_mode = 0
 theme_override_constants/outline_size = 1
@@ -520,7 +351,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_kl61j")
 text = "Pause"
 
-[node name="faster_button" type="Button" parent="v/bottom/h"]
+[node name="faster_button" type="Button" parent="v/bottom/h/Time Controls"]
 layout_mode = 2
 tooltip_text = "Faster"
 focus_mode = 0
@@ -533,7 +364,7 @@ icon = ExtResource("6_6v10q")
 alignment = 0
 icon_alignment = 2
 
-[node name="fastest_button" type="Button" parent="v/bottom/h"]
+[node name="fastest_button" type="Button" parent="v/bottom/h/Time Controls"]
 layout_mode = 2
 tooltip_text = "Fastest"
 focus_mode = 0
@@ -545,16 +376,17 @@ shortcut = SubResource("Shortcut_k0ai2")
 icon = ExtResource("7_35o54")
 icon_alignment = 2
 
-[node name="status" type="HBoxContainer" parent="v/bottom/h"]
+[node name="Status" type="HBoxContainer" parent="v/bottom/h"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 alignment = 2
+script = ExtResource("20_6q2s3")
 
-[connection signal="gui_input" from="v/main/SpaceContainer/SubViewportContainer" to="." method="_on_sub_viewport_container_gui_input"]
-[connection signal="pressed" from="v/bottom/h/slowest_button" to="." method="_on_slowest_button_pressed"]
-[connection signal="pressed" from="v/bottom/h/slower_button" to="." method="_on_slower_button_pressed"]
-[connection signal="pressed" from="v/bottom/h/pause_button" to="." method="_on_pause_button_pressed"]
-[connection signal="pressed" from="v/bottom/h/faster_button" to="." method="_on_faster_button_pressed"]
-[connection signal="pressed" from="v/bottom/h/fastest_button" to="." method="_on_fastest_button_pressed"]
+[connection signal="gui_input" from="v/main/SpaceContainer/SubViewportContainer" to="v/top/HBoxContainer/tools/tools" method="sub_viewport_container_gui_input"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/slowest_button" to="v/bottom/h/Time Controls" method="slowest"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/slower_button" to="v/bottom/h/Time Controls" method="slower"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/pause_button" to="v/bottom/h/Time Controls" method="pause"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/faster_button" to="v/bottom/h/Time Controls" method="faster"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/fastest_button" to="v/bottom/h/Time Controls" method="fastest"]

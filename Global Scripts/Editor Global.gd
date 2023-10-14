@@ -6,6 +6,8 @@ var selection = []
 
 var simulationSpeed: int = 1
 
+var focused_object: Node2D
+
 const MIN_SIMULATION_SPEED = 1
 const DEFAULT_SIMULATION_SPEED = 10
 const MAX_SIMULATION_SPEED = 250
@@ -253,4 +255,10 @@ func createStyleBox(color: Color):
 	styleBox.bg_color = color
 	return styleBox
 
+func focusObject(node: Node2D):
+	focused_object = node
+	anything_changed.emit()
+
+func getFocusedObject():
+	return focused_object
 
