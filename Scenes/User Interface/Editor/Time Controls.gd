@@ -1,10 +1,18 @@
-extends HBoxContainer
+extends VBoxContainer
+
+@onready var pause_button = $Buttons/pause_button
 
 func _process(delta):
 	if get_tree().paused:
-		$pause_button.text = 'Continue'
+		pause_button.text = 'Continue'
 	else:
-		$pause_button.text = 'Pause'
+		pause_button.text = 'Pause'
+
+	$"ProgressBar".value = lerpf(
+		$"ProgressBar".value,
+		EditorGlobal.get_simulation_speed(),
+		0.1
+	)
 
 func pause():
 	get_tree().paused = !get_tree().paused

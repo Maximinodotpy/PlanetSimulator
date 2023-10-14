@@ -10,6 +10,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	width = get_parent().weight * 2
+
 	if points.size() >= 1:
 		points[0] = get_parent().position
 

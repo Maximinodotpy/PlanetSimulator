@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=41 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Tools.gd" id="8_p7biu"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Selected Rect.gd" id="17_iv4k2"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Status.gd" id="20_6q2s3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Time Controls.gd" id="20_08kx2"]
 
@@ -82,6 +83,12 @@ unicode = 102
 
 [sub_resource type="Shortcut" id="Shortcut_k0ai2"]
 events = [SubResource("InputEventKey_iq8te")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv02v"]
+bg_color = Color(0.352941, 0.352941, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdykt"]
+bg_color = Color(0, 0.462745, 0.819608, 1)
 
 [node name="main" type="Control"]
 process_mode = 3
@@ -277,7 +284,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1308, 976)
+size = Vector2i(1308, 960)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
@@ -296,6 +303,7 @@ default_color = Color(0.313726, 0.313726, 0.313726, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ks2h5")
+script = ExtResource("17_iv4k2")
 
 [node name="space" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport" instance=ExtResource("3_wssg3")]
 
@@ -315,11 +323,14 @@ theme_override_constants/margin_bottom = 10
 [node name="h" type="HBoxContainer" parent="v/bottom"]
 layout_mode = 2
 
-[node name="Time Controls" type="HBoxContainer" parent="v/bottom/h"]
+[node name="Time Controls" type="VBoxContainer" parent="v/bottom/h"]
 layout_mode = 2
 script = ExtResource("20_08kx2")
 
-[node name="slowest_button" type="Button" parent="v/bottom/h/Time Controls"]
+[node name="Buttons" type="HBoxContainer" parent="v/bottom/h/Time Controls"]
+layout_mode = 2
+
+[node name="slowest_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Slowest"
 focus_mode = 0
@@ -330,7 +341,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_soh8f")
 icon = ExtResource("4_02nni")
 
-[node name="slower_button" type="Button" parent="v/bottom/h/Time Controls"]
+[node name="slower_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Slower"
 focus_mode = 0
@@ -341,7 +352,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_ejxwk")
 icon = ExtResource("5_oq7qi")
 
-[node name="pause_button" type="Button" parent="v/bottom/h/Time Controls"]
+[node name="pause_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
 layout_mode = 2
 focus_mode = 0
 theme_override_constants/outline_size = 1
@@ -351,7 +362,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_kl61j")
 text = "Pause"
 
-[node name="faster_button" type="Button" parent="v/bottom/h/Time Controls"]
+[node name="faster_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Faster"
 focus_mode = 0
@@ -364,7 +375,7 @@ icon = ExtResource("6_6v10q")
 alignment = 0
 icon_alignment = 2
 
-[node name="fastest_button" type="Button" parent="v/bottom/h/Time Controls"]
+[node name="fastest_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Fastest"
 focus_mode = 0
@@ -376,6 +387,17 @@ shortcut = SubResource("Shortcut_k0ai2")
 icon = ExtResource("7_35o54")
 icon_alignment = 2
 
+[node name="ProgressBar" type="ProgressBar" parent="v/bottom/h/Time Controls"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hv02v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fdykt")
+min_value = 1.0
+max_value = 250.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
 [node name="Status" type="HBoxContainer" parent="v/bottom/h"]
 clip_contents = true
 layout_mode = 2
@@ -385,8 +407,8 @@ alignment = 2
 script = ExtResource("20_6q2s3")
 
 [connection signal="gui_input" from="v/main/SpaceContainer/SubViewportContainer" to="v/top/HBoxContainer/tools/tools" method="sub_viewport_container_gui_input"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/slowest_button" to="v/bottom/h/Time Controls" method="slowest"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/slower_button" to="v/bottom/h/Time Controls" method="slower"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/pause_button" to="v/bottom/h/Time Controls" method="pause"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/faster_button" to="v/bottom/h/Time Controls" method="faster"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/fastest_button" to="v/bottom/h/Time Controls" method="fastest"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/slowest_button" to="v/bottom/h/Time Controls" method="slowest"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/slower_button" to="v/bottom/h/Time Controls" method="slower"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/pause_button" to="v/bottom/h/Time Controls" method="pause"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/faster_button" to="v/bottom/h/Time Controls" method="faster"]
+[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/fastest_button" to="v/bottom/h/Time Controls" method="fastest"]

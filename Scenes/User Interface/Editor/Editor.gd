@@ -1,11 +1,6 @@
 extends Control
 
-@onready var status_container = $v/bottom/h/status
-
-@onready var spaceViewport = EditorGlobal.get_space_viewport()
-@onready var space = EditorGlobal.get_space()
-
-@onready var selectedRect = $v/main/SpaceContainer/SubViewportContainer/space_viewport/SelectedRect
+#@onready var selectedRect = $v/main/SpaceContainer/SubViewportContainer/space_viewport/SelectedRect
 
 func _ready():
 	if EditorSaves.currentSaveName != '':
@@ -16,12 +11,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
-	var selection_rect = EditorGlobal.get_selection_bounding_rect()
-
-	selectedRect.position = selection_rect.position
-	selectedRect.size = selection_rect.size
-
 	if Input.is_key_pressed(KEY_DELETE):
 		EditorGlobal.delete_selected()
 
