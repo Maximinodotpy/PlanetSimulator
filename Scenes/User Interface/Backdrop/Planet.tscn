@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bge2tu02wjbuy"]
+
+[sub_resource type="GDScript" id="GDScript_kdsod"]
+resource_name = "Fake Planet"
+script/source = "@tool
+extends Node2D
+
+@export_color_no_alpha var color
+@export var radius = 200
+
+func _process(delta):
+	queue_redraw()
+
+func _draw():
+	draw_circle(Vector2(0, 0), radius, color)
+"
+
+[node name="Planet" type="Node2D"]
+script = SubResource("GDScript_kdsod")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy6bylrscp2ch"]
+
+[sub_resource type="GDScript" id="GDScript_5l5ng"]
+resource_name = "Pivot"
+script/source = "extends Node2D
+
+@export var speed = 0.3
+
+func _ready():
+	randomize()
+
+	rotation_degrees = randi_range(0, 360)
+
+func _process(delta):
+	rotation_degrees += speed
+
+func visibility_callback():
+	print('fasd')
+"
+
+[node name="Pivot" type="Node2D"]
+script = SubResource("GDScript_5l5ng")

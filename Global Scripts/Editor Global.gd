@@ -213,7 +213,16 @@ func get_file_name_edit() -> LineEdit:
 	return Helpers.getSceneRoot().find_children('File Name Edit')[0]
 
 func get_all_objects():
-	return get_tree().get_nodes_in_group('gravity_object')
+	var objects = get_tree().get_nodes_in_group('gravity_object')
+
+	var return_objs = []
+
+	for i in objects:
+		if i.name != 'Space Ship':
+			pass
+		return_objs.append(i)
+
+	return return_objs
 
 
 func get_simulation_speed() -> int:

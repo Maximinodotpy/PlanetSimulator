@@ -9,7 +9,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	call_deferred('focusCameraToObject')
+#	print(EditorGlobal.get_space_viewport().get_camera_2d())
+	pass
+#	call_deferred('focusCameraToObject')
 
 func focusCameraToObject():
 	if EditorGlobal.getFocusedObject():

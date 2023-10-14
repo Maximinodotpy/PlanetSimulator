@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq0r4d1q8h3ba"]
+
+[ext_resource type="PackedScene" uid="uid://bge2tu02wjbuy" path="res://Scenes/User Interface/Backdrop/Planet.tscn" id="1_ktyib"]
+[ext_resource type="PackedScene" uid="uid://dy6bylrscp2ch" path="res://Scenes/User Interface/Backdrop/Pivot.tscn" id="2_qumxd"]
+
+[node name="Backdrop" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="Earth and Moon" parent="." instance=ExtResource("2_qumxd")]
+position = Vector2(960, 540)
+
+[node name="Planet" parent="Earth and Moon" instance=ExtResource("1_ktyib")]
+position = Vector2(-368, 0)
+color = Color(0.478431, 0.188235, 0.188235, 1)
+radius = 20
+
+[node name="Pivot" parent="Earth and Moon/Planet" instance=ExtResource("2_qumxd")]
+
+[node name="Planet" parent="Earth and Moon/Planet/Pivot" instance=ExtResource("1_ktyib")]
+position = Vector2(-139, 0)
+color = Color(0.411765, 0.611765, 0.411765, 1)
+radius = 5
+
+[node name="Tandem" parent="." instance=ExtResource("2_qumxd")]
+position = Vector2(960, 540)
+
+[node name="Pivot" parent="Tandem" instance=ExtResource("2_qumxd")]
+position = Vector2(22, 358)
+
+[node name="Planet" parent="Tandem/Pivot" instance=ExtResource("1_ktyib")]
+position = Vector2(-73, -5)
+color = Color(0.301961, 0.580392, 0.784314, 1)
+radius = 8
+
+[node name="Pivot2" parent="Tandem" instance=ExtResource("2_qumxd")]
+position = Vector2(24, 359)
+
+[node name="Planet" parent="Tandem/Pivot2" instance=ExtResource("1_ktyib")]
+position = Vector2(73, 4)
+color = Color(0.301961, 0.580392, 0.784314, 1)
+radius = 8
+
+[node name="Pivot" parent="." instance=ExtResource("2_qumxd")]
+position = Vector2(960, 540)
+
+[node name="Sun" parent="Pivot" instance=ExtResource("1_ktyib")]
+position = Vector2(28, 0)
+color = Color(0.984314, 0.862745, 0.482353, 1)
+radius = 100

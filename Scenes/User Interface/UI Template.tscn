@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhrdbkvfafbq1"]
+[gd_scene load_steps=4 format=3 uid="uid://dhrdbkvfafbq1"]
 
 [ext_resource type="Theme" uid="uid://6a0nosmodlnp" path="res://Theme/Theme.tres" id="1_5u4sg"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="1_rcwf8"]
+[ext_resource type="PackedScene" uid="uid://cq0r4d1q8h3ba" path="res://Scenes/User Interface/Backdrop/Backdrop.tscn" id="3_k6rfj"]
 
 [node name="UI Template" type="Control"]
 process_mode = 3
@@ -21,6 +22,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="Backdrop" parent="." instance=ExtResource("3_k6rfj")]
 
 [node name="m" type="MarginContainer" parent="."]
 layout_mode = 1
