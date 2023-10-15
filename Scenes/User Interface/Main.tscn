@@ -65,6 +65,7 @@ script = SubResource("GDScript_6u0x5")
 layout_mode = 2
 
 [node name="Settings Button" type="Button" parent="m/v/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Settings"
