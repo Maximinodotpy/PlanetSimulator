@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsocfxao3rhf3"]
+[gd_scene load_steps=5 format=3 uid="uid://bsocfxao3rhf3"]
 
 [ext_resource type="PackedScene" uid="uid://crnb8umwfskq4" path="res://Scenes/Gravity Object/Gravity Object Template.tscn" id="1_4hy78"]
 [ext_resource type="Script" path="res://Scenes/Space Ship/Space Ship.gd" id="2_qvskm"]
+[ext_resource type="Theme" uid="uid://6a0nosmodlnp" path="res://Theme/Theme.tres" id="3_c0i86"]
+[ext_resource type="FontFile" uid="uid://dv1d2pqlg2vu2" path="res://Theme/Font/Segoe UI/segoeui.ttf" id="4_oripr"]
 
 [node name="Space Ship" instance=ExtResource("1_4hy78")]
 z_index = 10
@@ -12,3 +14,26 @@ position = Vector2(0, -1.6)
 scale = Vector2(0.5, 0.6)
 color = Color(0.478431, 0.776471, 0.552941, 1)
 polygon = PackedVector2Array(0, -24, -16, 16, 16, 16)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Speed Label" type="Label" parent="CanvasLayer/MarginContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("3_c0i86")
+theme_override_fonts/font = ExtResource("4_oripr")
+theme_override_font_sizes/font_size = 20
+text = "Speed: 1
+"
+horizontal_alignment = 1

@@ -22,6 +22,11 @@ signal selection_changed
 signal anything_changed
 
 
+## View Signals
+signal toggle_side_panel
+signal toggle_status_bar
+
+
 enum OBJECT_TYPES {
 	Planet,
 	Ship

@@ -8,21 +8,20 @@ func _init():
 	tool_icon = preload("res://Theme/Icons/rocket.svg")
 
 func selected():
+	EditorGlobal.anything_changed.emit()
 	EditorGlobal.clear_selection()
 
 	spaceShipSceneInstance = spaceShipScene.instantiate()
 	spaceShipSceneInstance.set_position(viewport.get_camera_2d().position)
 
-	print(spaceShipSceneInstance)
-
 	EditorGlobal.get_space().add_child(spaceShipSceneInstance)
-
-	print(spaceShipSceneInstance.is_inside_tree())
 
 	EditorGlobal.focusObject(spaceShipSceneInstance)
 
 func unselected():
-	if spaceShipSceneInstance:
+	if is_instance_valid(spaceShipSceneInstance):
 		spaceShipSceneInstance.queue_free()
 
 	EditorGlobal.unfocus()
+
+	EditorGlobal.anything_changed.emit()

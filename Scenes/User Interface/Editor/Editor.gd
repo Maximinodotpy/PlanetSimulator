@@ -7,14 +7,10 @@ func _ready():
 	EditorGlobal.reset_simulation_speed()
 	EditorGlobal.pause_simulation()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	print(EditorGlobal.get_space_viewport().get_camera_2d())
-	pass
-#	call_deferred('focusCameraToObject')
+	call_deferred('focusCameraToObject')
 
 func focusCameraToObject():
-	if EditorGlobal.getFocusedObject():
+	if is_instance_valid(EditorGlobal.getFocusedObject()):
 		var focusObjectPos = EditorGlobal.getFocusedObject().position
-
 		EditorGlobal.get_space_viewport().get_camera_2d().position = focusObjectPos

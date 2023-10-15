@@ -16,6 +16,14 @@ const BREAK_FOCUS = 'Break Focus'
 const BREAK_FOCUS_INDEX = 3
 var BREAK_FOCUS_SHORTCUT = EditorGlobal.createShortcut(KEY_F, true, true)
 
+const TOGGLE_SIDE_PANEL = 'Toggle Side Panel'
+const TOGGLE_SIDE_PANEL_INDEX = 5
+var TOGGLE_SIDE_PANEL_SHORTCUT = EditorGlobal.createShortcut(KEY_B, true)
+
+const TOGGLE_BOTTOM_PANEL = 'Toggle Bottom Panel'
+const TOGGLE_BOTTOM_PANEL_INDEX = 6
+var TOGGLE_BOTTOM_PANEL_SHORTCUT = EditorGlobal.createShortcut(KEY_J, true)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_item(GO_TO_ORIGIN, GO_TO_ORIGIN_INDEX)
@@ -29,6 +37,14 @@ func _ready():
 
 	add_item(BREAK_FOCUS, BREAK_FOCUS_INDEX)
 	set_item_shortcut(BREAK_FOCUS_INDEX, BREAK_FOCUS_SHORTCUT)
+
+	add_separator('User Interface', 4)
+
+	add_item(TOGGLE_SIDE_PANEL, TOGGLE_SIDE_PANEL_INDEX)
+	set_item_shortcut(TOGGLE_SIDE_PANEL_INDEX, TOGGLE_SIDE_PANEL_SHORTCUT)
+
+	add_item(TOGGLE_BOTTOM_PANEL, TOGGLE_BOTTOM_PANEL_INDEX)
+	set_item_shortcut(TOGGLE_BOTTOM_PANEL_INDEX, TOGGLE_BOTTOM_PANEL_SHORTCUT)
 
 	index_pressed.connect(indexPressed)
 	EditorGlobal.anything_changed.connect(react)
@@ -50,6 +66,12 @@ func indexPressed(index: int):
 
 		BREAK_FOCUS:
 			EditorGlobal.unfocus()
+
+		TOGGLE_SIDE_PANEL:
+			EditorGlobal.toggle_side_panel.emit()
+
+		TOGGLE_BOTTOM_PANEL:
+			EditorGlobal.toggle_status_bar.emit()
 
 
 func react():

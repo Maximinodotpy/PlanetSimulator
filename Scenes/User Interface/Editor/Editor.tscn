@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=43 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -21,10 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://b2nn4sx744xpg" path="res://Scenes/User Interface/Editor/Icons/rabbit.svg" id="7_35o54"]
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Tools.gd" id="8_p7biu"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Side Panel.gd" id="10_81w7h"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Selected Rect.gd" id="17_iv4k2"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Status.gd" id="20_6q2s3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Time Controls.gd" id="20_08kx2"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Bottom Panel.gd" id="21_te8md"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Saving Overlay.gd" id="26_j4d5s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2h5"]
@@ -194,15 +196,16 @@ layout_mode = 2
 size_flags_vertical = 3
 split_offset = 600
 
-[node name="v-split" type="VSplitContainer" parent="v/main"]
+[node name="Side Panel" type="VSplitContainer" parent="v/main"]
 layout_mode = 2
 split_offset = 600
+script = ExtResource("10_81w7h")
 
-[node name="top-tabs" type="TabContainer" parent="v/main/v-split"]
+[node name="top-tabs" type="TabContainer" parent="v/main/Side Panel"]
 layout_mode = 2
 drag_to_rearrange_enabled = true
 
-[node name="Properties" type="MarginContainer" parent="v/main/v-split/top-tabs"]
+[node name="Properties" type="MarginContainer" parent="v/main/Side Panel/top-tabs"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -210,21 +213,21 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("3_lsvst")
 
-[node name="v" type="VBoxContainer" parent="v/main/v-split/top-tabs/Properties"]
+[node name="v" type="VBoxContainer" parent="v/main/Side Panel/top-tabs/Properties"]
 layout_mode = 2
 
-[node name="Property Label" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_5tj81")]
+[node name="Property Label" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("5_5tj81")]
 layout_mode = 2
 text = "PROPERTY LABEL"
 
-[node name="Property Editor Multiple" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
+[node name="Property Editor Multiple" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
 layout_mode = 2
 
-[node name="Property Editor Single" parent="v/main/v-split/top-tabs/Properties/v" instance=ExtResource("7_yxhf3")]
+[node name="Property Editor Single" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("7_yxhf3")]
 visible = false
 layout_mode = 2
 
-[node name="Objects" type="MarginContainer" parent="v/main/v-split/top-tabs"]
+[node name="Objects" type="MarginContainer" parent="v/main/Side Panel/top-tabs"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -232,19 +235,19 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="scroll" type="ScrollContainer" parent="v/main/v-split/top-tabs/Objects"]
+[node name="scroll" type="ScrollContainer" parent="v/main/Side Panel/top-tabs/Objects"]
 layout_mode = 2
 
-[node name="Objects" type="VBoxContainer" parent="v/main/v-split/top-tabs/Objects/scroll"]
+[node name="Objects" type="VBoxContainer" parent="v/main/Side Panel/top-tabs/Objects/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_8avdp")
 
-[node name="bottom-tabs" type="TabContainer" parent="v/main/v-split"]
+[node name="bottom-tabs" type="TabContainer" parent="v/main/Side Panel"]
 layout_mode = 2
 drag_to_rearrange_enabled = true
 
-[node name="Quick Actions" type="MarginContainer" parent="v/main/v-split/bottom-tabs"]
+[node name="Quick Actions" type="MarginContainer" parent="v/main/Side Panel/bottom-tabs"]
 clip_contents = true
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -253,7 +256,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("5_n7l7m")
 
-[node name="h-flow" type="HFlowContainer" parent="v/main/v-split/bottom-tabs/Quick Actions"]
+[node name="h-flow" type="HFlowContainer" parent="v/main/Side Panel/bottom-tabs/Quick Actions"]
 layout_mode = 2
 
 [node name="SpaceContainer" type="PanelContainer" parent="v/main"]
@@ -303,25 +306,26 @@ process_mode = 3
 rotation_smoothing_enabled = true
 script = ExtResource("4_by8r2")
 
-[node name="bottom" type="MarginContainer" parent="v"]
+[node name="Bottom Panel" type="MarginContainer" parent="v"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+script = ExtResource("21_te8md")
 
-[node name="h" type="HBoxContainer" parent="v/bottom"]
+[node name="h" type="HBoxContainer" parent="v/Bottom Panel"]
 layout_mode = 2
 
-[node name="Time Controls" type="VBoxContainer" parent="v/bottom/h"]
+[node name="Time Controls" type="VBoxContainer" parent="v/Bottom Panel/h"]
 layout_mode = 2
 script = ExtResource("20_08kx2")
 
-[node name="Buttons" type="HBoxContainer" parent="v/bottom/h/Time Controls"]
+[node name="Buttons" type="HBoxContainer" parent="v/Bottom Panel/h/Time Controls"]
 layout_mode = 2
 
-[node name="slowest_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
+[node name="slowest_button" type="Button" parent="v/Bottom Panel/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Slowest"
 focus_mode = 0
@@ -332,7 +336,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_soh8f")
 icon = ExtResource("4_02nni")
 
-[node name="slower_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
+[node name="slower_button" type="Button" parent="v/Bottom Panel/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Slower"
 focus_mode = 0
@@ -343,7 +347,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 shortcut = SubResource("Shortcut_ejxwk")
 icon = ExtResource("5_oq7qi")
 
-[node name="pause_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
+[node name="pause_button" type="Button" parent="v/Bottom Panel/h/Time Controls/Buttons"]
 layout_mode = 2
 focus_mode = 0
 theme_override_constants/outline_size = 1
@@ -352,7 +356,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_y1x8m")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_osrey")
 text = "Pause"
 
-[node name="faster_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
+[node name="faster_button" type="Button" parent="v/Bottom Panel/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Faster"
 focus_mode = 0
@@ -365,7 +369,7 @@ icon = ExtResource("6_6v10q")
 alignment = 0
 icon_alignment = 2
 
-[node name="fastest_button" type="Button" parent="v/bottom/h/Time Controls/Buttons"]
+[node name="fastest_button" type="Button" parent="v/Bottom Panel/h/Time Controls/Buttons"]
 layout_mode = 2
 tooltip_text = "Fastest"
 focus_mode = 0
@@ -377,7 +381,7 @@ shortcut = SubResource("Shortcut_k0ai2")
 icon = ExtResource("7_35o54")
 icon_alignment = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="v/bottom/h/Time Controls"]
+[node name="ProgressBar" type="ProgressBar" parent="v/Bottom Panel/h/Time Controls"]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_hv02v")
@@ -388,7 +392,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="Status" type="HBoxContainer" parent="v/bottom/h"]
+[node name="Status" type="HBoxContainer" parent="v/Bottom Panel/h"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -416,8 +420,8 @@ text = "Saving File"
 horizontal_alignment = 1
 
 [connection signal="gui_input" from="v/main/SpaceContainer/SubViewportContainer" to="v/top/HBoxContainer/tools/tools" method="sub_viewport_container_gui_input"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/slowest_button" to="v/bottom/h/Time Controls" method="slowest"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/slower_button" to="v/bottom/h/Time Controls" method="slower"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/pause_button" to="v/bottom/h/Time Controls" method="pause"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/faster_button" to="v/bottom/h/Time Controls" method="faster"]
-[connection signal="pressed" from="v/bottom/h/Time Controls/Buttons/fastest_button" to="v/bottom/h/Time Controls" method="fastest"]
+[connection signal="pressed" from="v/Bottom Panel/h/Time Controls/Buttons/slowest_button" to="v/Bottom Panel/h/Time Controls" method="slowest"]
+[connection signal="pressed" from="v/Bottom Panel/h/Time Controls/Buttons/slower_button" to="v/Bottom Panel/h/Time Controls" method="slower"]
+[connection signal="pressed" from="v/Bottom Panel/h/Time Controls/Buttons/pause_button" to="v/Bottom Panel/h/Time Controls" method="pause"]
+[connection signal="pressed" from="v/Bottom Panel/h/Time Controls/Buttons/faster_button" to="v/Bottom Panel/h/Time Controls" method="faster"]
+[connection signal="pressed" from="v/Bottom Panel/h/Time Controls/Buttons/fastest_button" to="v/Bottom Panel/h/Time Controls" method="fastest"]
