@@ -20,16 +20,20 @@ const TOGGLE_SIDE_PANEL = 'Toggle Side Panel'
 const TOGGLE_SIDE_PANEL_INDEX = 5
 var TOGGLE_SIDE_PANEL_SHORTCUT = EditorGlobal.createShortcut(KEY_B, true)
 
+const TOGGLE_SIDE_PANEL_POSITION = 'Toggle Side Panel Position'
+const TOGGLE_SIDE_PANEL_POSITION_INDEX = 6
+var TOGGLE_SIDE_PANEL_POSITION_SHORTCUT = EditorGlobal.createShortcut(KEY_B, true, true)
+
 const TOGGLE_BOTTOM_PANEL = 'Toggle Bottom Panel'
-const TOGGLE_BOTTOM_PANEL_INDEX = 6
+const TOGGLE_BOTTOM_PANEL_INDEX = 7
 var TOGGLE_BOTTOM_PANEL_SHORTCUT = EditorGlobal.createShortcut(KEY_J, true)
 
 const TOGGLE_ORIGIN_MARKER = 'Toggle Origin Marker'
-const TOGGLE_ORIGIN_MARKER_INDEX = 7
+const TOGGLE_ORIGIN_MARKER_INDEX = 8
 var TOGGLE_ORIGIN_MARKER_SHORTCUT = EditorGlobal.createShortcut(KEY_O, true, true)
 
 const TOGGLE_BACKGROUND_GRID = 'Toggle Background Grid'
-const TOGGLE_BACKGROUND_GRID_INDEX = 8
+const TOGGLE_BACKGROUND_GRID_INDEX = 9
 var TOGGLE_BACKGROUND_GRID_SHORTCUT = EditorGlobal.createShortcut(KEY_G, true, true)
 
 # Called when the node enters the scene tree for the first time.
@@ -50,6 +54,9 @@ func _ready():
 
 	add_item(TOGGLE_SIDE_PANEL, TOGGLE_SIDE_PANEL_INDEX)
 	set_item_shortcut(TOGGLE_SIDE_PANEL_INDEX, TOGGLE_SIDE_PANEL_SHORTCUT)
+
+	add_item(TOGGLE_SIDE_PANEL_POSITION, TOGGLE_SIDE_PANEL_POSITION_INDEX)
+	set_item_shortcut(TOGGLE_SIDE_PANEL_POSITION_INDEX, TOGGLE_SIDE_PANEL_POSITION_SHORTCUT)
 
 	add_item(TOGGLE_BOTTOM_PANEL, TOGGLE_BOTTOM_PANEL_INDEX)
 	set_item_shortcut(TOGGLE_BOTTOM_PANEL_INDEX, TOGGLE_BOTTOM_PANEL_SHORTCUT)
@@ -83,6 +90,9 @@ func indexPressed(index: int):
 
 		TOGGLE_SIDE_PANEL:
 			UserInterface.on_toggle_side_panel.emit()
+
+		TOGGLE_SIDE_PANEL_POSITION:
+			UserInterface.on_toggle_side_panel_position.emit()
 
 		TOGGLE_BOTTOM_PANEL:
 			UserInterface.on_toggle_status_bar.emit()

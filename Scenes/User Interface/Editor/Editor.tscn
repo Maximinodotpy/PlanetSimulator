@@ -194,7 +194,6 @@ script = ExtResource("4_gsugx")
 [node name="main" type="HSplitContainer" parent="v"]
 layout_mode = 2
 size_flags_vertical = 3
-split_offset = 600
 
 [node name="Side Panel" type="VSplitContainer" parent="v/main"]
 layout_mode = 2
@@ -278,7 +277,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1308, 966)
+size = Vector2i(1630, 966)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]

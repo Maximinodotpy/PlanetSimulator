@@ -6,6 +6,9 @@ func _ready():
 	EditorGlobal.anything_changed.connect(queue_redraw)
 	Selection.selection_changed.connect(queue_redraw)
 
+func _process(delta):
+	queue_redraw()
+
 func _draw():
 	var color = Color.WHITE
 
