@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgy8xkpbvycv7"]
+[gd_scene load_steps=3 format=3 uid="uid://dgy8xkpbvycv7"]
 
+[ext_resource type="Script" path="res://Scenes/Grid Background.gd" id="1_4dugj"]
 [ext_resource type="Texture2D" uid="uid://bggkiqbwapkjd" path="res://Graphics/kenney_prototype-textures/PNG/Dark/texture_08.png" id="4_m7m4r"]
 
 [node name="space" type="Node2D"]
 process_mode = 3
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_4dugj")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(29689, 15358)

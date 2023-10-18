@@ -13,15 +13,15 @@ func _ready():
 	EditorGlobal.anything_changed.connect(render)
 
 func render():
-	if not EditorGlobal.is_empty_selection():
+	if not Selection.is_empty_selection():
 
-		if EditorGlobal.is_single_selection():
-			spin_box.set_value_no_signal(EditorGlobal.get_selection()[0].weight)
+		if Selection.is_single_selection():
+			spin_box.set_value_no_signal(Selection.get_selection()[0].weight)
 		else:
 			spin_box.set_value_no_signal(0)
 
 func callback(new_val):
-	EditorGlobal.set_weight_for_each_selected(new_val)
+	Selection.set_weight_for_each_selected(new_val)
 "
 
 [node name="WeightSetter" type="HBoxContainer"]

@@ -45,36 +45,36 @@ func _ready():
 
 func indexPressed(index: int):
 	match get_item_text(index):
-		SELECT_ALL: EditorGlobal.select_all()
-		INVERSE_SELECTION: EditorGlobal.inverse_selection()
-		UNSELECT_ALL: EditorGlobal.clear_selection()
+		SELECT_ALL: Selection.select_all()
+		INVERSE_SELECTION: Selection.inverse_selection()
+		UNSELECT_ALL: Selection.clear_selection()
 		SELECT_ONE_RANDOMLY:
-			EditorGlobal.clear_selection()
-			EditorGlobal.add_one_random_to_selection()
+			Selection.clear_selection()
+			Selection.add_one_random_to_selection()
 
 		SELECT_MANY_RANDOMLY:
-			EditorGlobal.clear_selection()
+			Selection.clear_selection()
 
 			## Get Random Amount of objects
 			var amount = randi_range(1, EditorGlobal.get_all_objects().size())
 
 			for i in range(amount):
-				EditorGlobal.add_one_random_to_selection()
+				Selection.add_one_random_to_selection()
 
 func react():
 	set_item_disabled(
 		SELECT_ALL_INDEX,
-		EditorGlobal.is_all_selected(),
+		Selection.is_all_selected(),
 	)
 
 	set_item_disabled(
 		INVERSE_SELECTION_INDEX,
-		EditorGlobal.is_empty_selection() or EditorGlobal.is_all_selected(),
+		Selection.is_empty_selection() or Selection.is_all_selected(),
 	)
 
 	set_item_disabled(
 		UNSELECT_ALL_INDEX,
-		EditorGlobal.is_empty_selection(),
+		Selection.is_empty_selection(),
 	)
 
 	set_item_disabled(

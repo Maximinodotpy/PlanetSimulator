@@ -15,7 +15,7 @@ func _ready():
 func _process(_delta):
 	var accumulated = Vector2()
 
-	for object in EditorGlobal.get_selection():
+	for object in Selection.get_selection():
 		accumulated += object.motion.normalized()
 
 	accumulated = accumulated.normalized()

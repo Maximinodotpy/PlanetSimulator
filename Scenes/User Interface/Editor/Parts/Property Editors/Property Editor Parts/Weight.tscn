@@ -6,12 +6,12 @@ script/source = "extends HBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	EditorGlobal.selection_changed.connect(render)
+	Selection.selection_changed.connect(render)
 
 func render():
 	var collective_weight = 0
 
-	for object in EditorGlobal.get_selection():
+	for object in Selection.get_selection():
 		collective_weight += object.weight
 
 	$\"Data\".text = str(collective_weight)

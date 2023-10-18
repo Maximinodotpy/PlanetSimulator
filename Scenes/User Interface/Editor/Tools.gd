@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 var currentTool = 0
+var currentToolScript
 var isDragging = false
 var dragStart: Vector2
 var isDraggingSelection = false
@@ -61,19 +62,24 @@ func toolSwitched(button: Button = Button.new()):
 
 		currentTool = button.get_meta('id', 0)
 		tools[currentTool].selected()
+		currentToolScript = tools[currentTool]
 
+func _process(delta):
+	if isDragging:
+		var mousePosition = EditorGlobal.get_space().get_global_mouse_position()
+
+		if isDraggingSelection:
+			currentToolScript.selectionDragging(dragStart, mousePosition)
+		else:
+			currentToolScript.dragging(dragStart, mousePosition)
 
 func sub_viewport_container_gui_input(event):
+	if not currentTool:
+		return
+
 	var mousePosition = EditorGlobal.get_space().get_global_mouse_position()
-	var currentToolScript = tools[currentTool]
 
 	if event is InputEventMouseMotion:
-		if isDragging:
-			if isDraggingSelection:
-				currentToolScript.selectionDragging(dragStart, mousePosition)
-			else:
-				currentToolScript.dragging(dragStart, mousePosition)
-
 		currentToolScript.mouse_moved()
 
 	elif event is InputEventMouseButton:
@@ -84,7 +90,7 @@ func sub_viewport_container_gui_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				isDragging = true
-				isDraggingSelection = EditorGlobal.get_selection_bounding_rect().has_point(mousePosition)
+				isDraggingSelection = Selection.get_selection_bounding_rect().has_point(mousePosition)
 
 				dragStart = mousePosition
 				if isDraggingSelection:

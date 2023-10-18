@@ -1,0 +1,6 @@
+extends Node
+
+signal on_toggle_side_panel
+signal on_toggle_status_bar
+signal on_toggle_origin_marker
+signal on_toggle_background_grid

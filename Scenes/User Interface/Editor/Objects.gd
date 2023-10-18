@@ -28,7 +28,7 @@ func renderObjects():
 			checkBoxCallback(object, checkbox)
 		checkbox.pressed.connect(ccb)
 
-		checkbox.button_pressed = object in EditorGlobal.get_selection()
+		checkbox.button_pressed = object in Selection.get_selection()
 
 		lineEdit.text = '%s' % [ object.name, ]
 
@@ -42,7 +42,7 @@ func lineEditCallback(object: Node2D, lineedit: LineEdit):
 
 func checkBoxCallback(object: Node2D, checkbox: CheckBox):
 	if checkbox.button_pressed:
-		EditorGlobal.add_to_selection(object)
+		Selection.add_to_selection(object)
 	else:
-		EditorGlobal.remove_from_selection(object)
+		Selection.remove_from_selection(object)
 

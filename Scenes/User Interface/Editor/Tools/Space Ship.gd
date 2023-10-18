@@ -9,7 +9,7 @@ func _init():
 
 func selected():
 	EditorGlobal.anything_changed.emit()
-	EditorGlobal.clear_selection()
+	Selection.clear_selection()
 
 	spaceShipSceneInstance = spaceShipScene.instantiate()
 	spaceShipSceneInstance.set_position(viewport.get_camera_2d().position)

@@ -33,15 +33,15 @@ func _ready():
 
 func indexPressed(index: int):
 	match get_item_text(index):
-		DELETE: EditorGlobal.delete_selected()
-		STOP: EditorGlobal.stop_selected()
+		DELETE: Selection.delete_selected()
+		STOP: Selection.stop_selected()
 
 func react():
 	## Disable align menu if no nodes are selected
-	set_item_disabled(ALIGN_INDEX, EditorGlobal.is_empty_selection())
+	set_item_disabled(ALIGN_INDEX, Selection.is_empty_selection())
 
 	## Disable delete menu if no nodes are selected
-	set_item_disabled(DELETE_INDEX, EditorGlobal.is_empty_selection())
+	set_item_disabled(DELETE_INDEX, Selection.is_empty_selection())
 
 	## Disable stop menu if no nodes are selected
-	set_item_disabled(STOP_INDEX, EditorGlobal.is_empty_selection())
+	set_item_disabled(STOP_INDEX, Selection.is_empty_selection())

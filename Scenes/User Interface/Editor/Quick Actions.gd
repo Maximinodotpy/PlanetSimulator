@@ -5,39 +5,39 @@ var quickActionsAlways = [
 ]
 
 var quickActionsNothing = [
-	[ 'Select All', EditorGlobal.select_all ],
+	[ 'Select All', Selection.select_all ],
 ]
 
 var quickActionsSingle = [
-	[ 'Delete Selected', EditorGlobal.delete_selected ],
-	[ 'Unselect', EditorGlobal.clear_selection ],
-	[ 'Stop', EditorGlobal.stop_selected ],
+	[ 'Delete Selected', Selection.delete_selected ],
+	[ 'Unselect', Selection.clear_selection ],
+	[ 'Stop', Selection.stop_selected ],
 ]
 
 var quickActionsMultiple = [
-	[ 'Delete Selected', EditorGlobal.delete_selected ],
-	[ 'Align Left', EditorGlobal.align_selection_left ],
-	[ 'Align Right', EditorGlobal.align_selection_right ],
-	[ 'Align Top', EditorGlobal.align_selection_top ],
-	[ 'Align Bottom', EditorGlobal.align_selection_bottom ],
-	[ 'Center Vertically', EditorGlobal.center_selection_vertically ],
-	[ 'Center Horizontally', EditorGlobal.center_selection_horizontaly ],
-	[ 'Unselect All', EditorGlobal.clear_selection ],
-	[ 'Stop All', EditorGlobal.stop_selected ],
+	[ 'Delete Selected', Selection.delete_selected ],
+	[ 'Align Left', Selection.align_selection_left ],
+	[ 'Align Right', Selection.align_selection_right ],
+	[ 'Align Top', Selection.align_selection_top ],
+	[ 'Align Bottom', Selection.align_selection_bottom ],
+	[ 'Center Vertically', Selection.center_selection_vertically ],
+	[ 'Center Horizontally', Selection.center_selection_horizontaly ],
+	[ 'Unselect All', Selection.clear_selection ],
+	[ 'Stop All', Selection.stop_selected ],
 ]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _ready():
-	EditorGlobal.selection_changed.connect(renderActions)
+	Selection.selection_changed.connect(renderActions)
 	renderActions()
 
 func renderActions():
 	var actions = quickActionsAlways.duplicate(true)
 
-	if EditorGlobal.get_selection().size() == 1:
+	if Selection.get_selection().size() == 1:
 		actions.append_array(quickActionsSingle.duplicate(true))
-	elif EditorGlobal.get_selection().size() > 1:
+	elif Selection.get_selection().size() > 1:
 		actions.append_array(quickActionsMultiple.duplicate(true))
 	else:
 		actions.append_array(quickActionsNothing.duplicate(true))

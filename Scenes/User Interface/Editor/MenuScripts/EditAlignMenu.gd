@@ -36,10 +36,10 @@ func _ready():
 
 func indexPressed(index: int):
 	match get_item_text(index):
-		ALIGN_BOTTOM: EditorGlobal.align_selection_bottom()
-		ALIGN_TOP: EditorGlobal.align_selection_top()
-		ALIGN_LEFT: EditorGlobal.align_selection_left()
-		ALIGN_RIGHT: EditorGlobal.align_selection_right()
+		ALIGN_BOTTOM: Selection.align_selection_bottom()
+		ALIGN_TOP: Selection.align_selection_top()
+		ALIGN_LEFT: Selection.align_selection_left()
+		ALIGN_RIGHT: Selection.align_selection_right()
 		ALIGN_VERTICAL_CENTER: EditorGlobal.align_selection_vertical_center()
 		ALIGN_HORIZONTAL_CENTER: EditorGlobal.align_selection_horizontal_center()
 

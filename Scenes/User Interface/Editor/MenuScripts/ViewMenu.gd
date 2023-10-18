@@ -24,6 +24,14 @@ const TOGGLE_BOTTOM_PANEL = 'Toggle Bottom Panel'
 const TOGGLE_BOTTOM_PANEL_INDEX = 6
 var TOGGLE_BOTTOM_PANEL_SHORTCUT = EditorGlobal.createShortcut(KEY_J, true)
 
+const TOGGLE_ORIGIN_MARKER = 'Toggle Origin Marker'
+const TOGGLE_ORIGIN_MARKER_INDEX = 7
+var TOGGLE_ORIGIN_MARKER_SHORTCUT = EditorGlobal.createShortcut(KEY_O, true, true)
+
+const TOGGLE_BACKGROUND_GRID = 'Toggle Background Grid'
+const TOGGLE_BACKGROUND_GRID_INDEX = 8
+var TOGGLE_BACKGROUND_GRID_SHORTCUT = EditorGlobal.createShortcut(KEY_G, true, true)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_item(GO_TO_ORIGIN, GO_TO_ORIGIN_INDEX)
@@ -46,6 +54,12 @@ func _ready():
 	add_item(TOGGLE_BOTTOM_PANEL, TOGGLE_BOTTOM_PANEL_INDEX)
 	set_item_shortcut(TOGGLE_BOTTOM_PANEL_INDEX, TOGGLE_BOTTOM_PANEL_SHORTCUT)
 
+	add_item(TOGGLE_ORIGIN_MARKER, TOGGLE_ORIGIN_MARKER_INDEX)
+	set_item_shortcut(TOGGLE_ORIGIN_MARKER_INDEX, TOGGLE_ORIGIN_MARKER_SHORTCUT)
+
+	add_item(TOGGLE_BACKGROUND_GRID, TOGGLE_BACKGROUND_GRID_INDEX)
+	set_item_shortcut(TOGGLE_BACKGROUND_GRID_INDEX, TOGGLE_BACKGROUND_GRID_SHORTCUT)
+
 	index_pressed.connect(indexPressed)
 	EditorGlobal.anything_changed.connect(react)
 	react()
@@ -58,26 +72,32 @@ func indexPressed(index: int):
 
 		GO_SELECTION_CENTER:
 			EditorGlobal.unfocus()
-			var selectionCenter = EditorGlobal.get_selection_bounding_rect().position + EditorGlobal.get_selection_bounding_rect().size / 2
+			var selectionCenter = Selection.get_selection_bounding_rect().position + Selection.get_selection_bounding_rect().size / 2
 			EditorGlobal.get_space_viewport().get_camera_2d().position = selectionCenter
 
 		FOCUS_CURRENT_PLANET:
-			EditorGlobal.focusObject(EditorGlobal.get_selection()[0])
+			EditorGlobal.focusObject(Selection.get_selection()[0])
 
 		BREAK_FOCUS:
 			EditorGlobal.unfocus()
 
 		TOGGLE_SIDE_PANEL:
-			EditorGlobal.toggle_side_panel.emit()
+			UserInterface.on_toggle_side_panel.emit()
 
 		TOGGLE_BOTTOM_PANEL:
-			EditorGlobal.toggle_status_bar.emit()
+			UserInterface.on_toggle_status_bar.emit()
+
+		TOGGLE_ORIGIN_MARKER:
+			UserInterface.on_toggle_origin_marker.emit()
+
+		TOGGLE_BACKGROUND_GRID:
+			UserInterface.on_toggle_background_grid.emit()
 
 
 func react():
 	# Disable Selection Center if nothing is selected
-	set_item_disabled(GO_SELECTION_CENTER_INDEX, EditorGlobal.is_empty_selection())
+	set_item_disabled(GO_SELECTION_CENTER_INDEX, Selection.is_empty_selection())
 
-	set_item_disabled(FOCUS_CURRENT_PLANET_INDEX, not EditorGlobal.is_single_selection())
+	set_item_disabled(FOCUS_CURRENT_PLANET_INDEX, not Selection.is_single_selection())
 
 	set_item_disabled(BREAK_FOCUS_INDEX, EditorGlobal.getFocusedObject() == null)

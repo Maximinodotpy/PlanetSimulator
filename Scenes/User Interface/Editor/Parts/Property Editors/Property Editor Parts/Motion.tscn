@@ -20,19 +20,19 @@ func _ready():
 	timer.timeout.connect(render)
 
 func render():
-	if EditorGlobal.is_empty_selection():
+	if Selection.is_empty_selection():
 		return
 
 	if not x_spin_box.get_line_edit().has_focus():
-		x_spin_box.set_value_no_signal(EditorGlobal.get_selection()[0].motion.x)
+		x_spin_box.set_value_no_signal(Selection.get_selection()[0].motion.x)
 	if not y_spin_box.get_line_edit().has_focus():
-		y_spin_box.set_value_no_signal(EditorGlobal.get_selection()[0].motion.y)
+		y_spin_box.set_value_no_signal(Selection.get_selection()[0].motion.y)
 
 func x_call_back(new_val):
-	EditorGlobal.get_selection()[0].motion.x = new_val
+	Selection.get_selection()[0].motion.x = new_val
 
 func y_call_back(new_val):
-	EditorGlobal.get_selection()[0].motion.y = new_val
+	Selection.get_selection()[0].motion.y = new_val
 "
 
 [node name="Motion" type="HBoxContainer"]

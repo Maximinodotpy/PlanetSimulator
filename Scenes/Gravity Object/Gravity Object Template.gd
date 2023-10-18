@@ -42,12 +42,12 @@ func _process(delta):
 
 		if weight > object.weight:
 			weight += object.weight
-			EditorGlobal.remove_from_selection(object)
+			Selection.remove_from_selection(object)
 			object.queue_free()
 
 		else:
 			object.weight += weight
-			EditorGlobal.remove_from_selection(self)
+			Selection.remove_from_selection(self)
 			queue_free()
 
 func frameReaction():

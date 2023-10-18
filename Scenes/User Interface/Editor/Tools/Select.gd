@@ -25,7 +25,7 @@ func selected():
 
 func dragStart(startPos):
 	print('Selection Started')
-	EditorGlobal.clear_selection()
+	Selection.clear_selection()
 	selectBox.position = startPos
 
 func dragging(startPos, currentPos):
@@ -45,7 +45,7 @@ func dragging(startPos, currentPos):
 		if currenSelectionRect.has_point(planet.position):
 			newNodes.append(planet)
 
-	EditorGlobal.swap_selection(newNodes)
+	Selection.swap_selection(newNodes)
 
 
 func dragEnd(starPos, endPos):
@@ -56,7 +56,7 @@ func dragEnd(starPos, endPos):
 
 
 func selectionDragStart(startPos):
-	moveOffset = EditorGlobal.get_selection_rect().position - startPos
+	moveOffset = Selection.get_selection_rect().position - startPos
 	print('moveOffset', moveOffset)
 
 func selectionDragging(startPos, currentPos):
@@ -65,9 +65,9 @@ func selectionDragging(startPos, currentPos):
 	if Input.is_key_pressed(KEY_SHIFT):
 		targetPos = targetPos.snapped(Vector2(100, 100))
 	elif Input.is_key_pressed(KEY_CTRL):
-		targetPos = targetPos.snapped(EditorGlobal.get_selection_bounding_rect().size)
+		targetPos = targetPos.snapped(Selection.get_selection_bounding_rect().size)
 
-	EditorGlobal.move_selected_to(targetPos)
+	Selection.move_selected_to(targetPos)
 
 func unselected():
 	selectBox.queue_free()

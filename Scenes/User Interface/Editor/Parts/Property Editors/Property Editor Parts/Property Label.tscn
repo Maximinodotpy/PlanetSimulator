@@ -11,12 +11,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if EditorGlobal.get_selection().size() == 0:
+	if Selection.get_selection().size() == 0:
 		text = 'Nothing Selected'
-	elif EditorGlobal.get_selection().size() == 1:
-		text = EditorGlobal.get_selection()[0].name
-	elif EditorGlobal.get_selection().size() > 1:
-		text = 'Multiple Objects (%s)' % [ EditorGlobal.get_selection().size() ]
+	elif Selection.get_selection().size() == 1:
+		text = Selection.get_selection()[0].name
+	elif Selection.get_selection().size() > 1:
+		text = 'Multiple Objects (%s)' % [ Selection.get_selection().size() ]
 "
 
 [node name="Property Label" type="Label"]

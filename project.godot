@@ -24,6 +24,8 @@ EventBus="*res://addons/godot_helpers/Singletons/EventBus.gd"
 Helpers="*res://addons/godot_helpers/Singletons/Helpers.gd"
 EditorGlobal="*res://Global Scripts/Editor Global.gd"
 EditorSaves="*res://Global Scripts/Editor Saves.gd"
+UserInterface="*res://Global Scripts/User Interface.gd"
+Selection="*res://Global Scripts/Selection.gd"
 
 [display]
 

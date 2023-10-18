@@ -6,7 +6,7 @@ const tracerInterval = 10
 var counter = 0
 
 func _ready():
-	EditorGlobal.selection_changed.connect(changeColor)
+	Selection.selection_changed.connect(changeColor)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,7 +26,7 @@ func _process(delta):
 	counter += 1
 
 func changeColor():
-	if get_parent() in EditorGlobal.get_selection():
+	if get_parent() in Selection.get_selection():
 		default_color = Color(0.6235294342041, 0.40000000596046, 0.76078432798386)
 	else:
 		default_color = Color(0, 0.4, 0.76)
