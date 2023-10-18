@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://conhru5rv0g7o"]
+
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Parts/Object Row.gd" id="1_gp5y1"]
+
+[node name="Object Row" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1577.0
+offset_bottom = -992.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gp5y1")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+flat = true
+
+[node name="Selected Button" type="CheckBox" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "Select"
+icon_alignment = 1
+expand_icon = true

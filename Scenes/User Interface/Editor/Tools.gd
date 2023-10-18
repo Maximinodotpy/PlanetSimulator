@@ -74,6 +74,9 @@ func _process(delta):
 			currentToolScript.dragging(dragStart, mousePosition)
 
 func sub_viewport_container_gui_input(event):
+	if EditorGlobal.get_viewport().gui_get_focus_owner():
+		EditorGlobal.get_viewport().gui_get_focus_owner().release_focus()
+
 	if not currentTool:
 		return
 
@@ -83,9 +86,6 @@ func sub_viewport_container_gui_input(event):
 		currentToolScript.mouse_moved()
 
 	elif event is InputEventMouseButton:
-
-		if get_viewport().gui_get_focus_owner():
-			get_viewport().gui_get_focus_owner().release_focus()
 
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

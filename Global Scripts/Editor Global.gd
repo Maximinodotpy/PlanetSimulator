@@ -8,7 +8,7 @@ var focused_object: Node2D
 
 const MIN_SIMULATION_SPEED = 1
 const DEFAULT_SIMULATION_SPEED = 10
-const MAX_SIMULATION_SPEED = 250
+const MAX_SIMULATION_SPEED = 1000
 
 ## This is called when
 ## The Selection Changes

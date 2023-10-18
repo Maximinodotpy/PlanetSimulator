@@ -6,9 +6,12 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	UserInterface.on_toggle_origin_marker.connect(toggle_visibility)
+	visible = UserInterface.get_config_value('origin_marker_visible', true)
 
 func toggle_visibility():
-	visible = not visible
+	visible = !visible
+	UserInterface.set_config_value('origin_marker_visible', visible)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

@@ -16,7 +16,7 @@ func _process(delta):
 	if not isAffectedByOthers:
 		return
 
-	for object in EditorGlobal.get_all_objects():
+	for object in Objects.get_all_objects():
 		if object == self or not object.affectsOthers or object.is_queued_for_deletion():
 			continue
 
@@ -42,13 +42,11 @@ func _process(delta):
 
 		if weight > object.weight:
 			weight += object.weight
-			Selection.remove_from_selection(object)
-			object.queue_free()
+			Objects.remove_object(object)
 
 		else:
 			object.weight += weight
-			Selection.remove_from_selection(self)
-			queue_free()
+			Objects.remove_object(self)
 
 func frameReaction():
 	pass

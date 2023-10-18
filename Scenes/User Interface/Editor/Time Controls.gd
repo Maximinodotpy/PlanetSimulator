@@ -2,6 +2,9 @@ extends VBoxContainer
 
 @onready var pause_button = $Buttons/pause_button
 
+func _ready():
+	$"ProgressBar".max_value = EditorGlobal.MAX_SIMULATION_SPEED
+
 func _process(delta):
 	if get_tree().paused:
 		pause_button.text = 'Continue'
