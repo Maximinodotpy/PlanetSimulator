@@ -27,13 +27,13 @@ func render():
 
 func x_call_back(new_val):
 	print('Mving X to ', new_val)
-	EditorGlobal.move_selected_to(Vector2(
+	Selection.move_selected_to(Vector2(
 		new_val,
 		Selection.get_selection_rect().position.y
 	))
 
 func y_call_back(new_val):
-	EditorGlobal.move_selected_to(Vector2(
+	Selection.move_selected_to(Vector2(
 		Selection.get_selection_rect().position.x,
 		new_val
 	))

@@ -16,7 +16,7 @@ func is_multi_selection() -> bool:
 	return get_selection().size() > 1
 
 func is_all_selected() -> bool:
-	return get_selection().size() == EditorGlobal.get_all_objects().size()
+	return get_selection().size() == Objects.get_all_objects().size()
 
 # Getting the Current Selection
 func get_selection():
@@ -121,7 +121,7 @@ func get_selection_bounding_rect() -> Rect2:
 
 func delete_selected():
 	for object in get_selection().duplicate():
-		EditorGlobal.remove_object(object)
+		Objects.remove_object(object)
 
 	EditorGlobal.anything_changed.emit()
 

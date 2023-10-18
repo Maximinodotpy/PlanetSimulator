@@ -36,7 +36,7 @@ func load_file():
 	saveFile.load(get_main_file_path(currentSaveName))
 
 	for section in saveFile.get_sections():
-		var planet = EditorGlobal.add_object(EditorGlobal.OBJECT_TYPES.Planet)
+		var planet = Objects.add_object()
 
 		planet.name = section
 		planet.position = saveFile.get_value(section, 'position', Vector2(0, 0))

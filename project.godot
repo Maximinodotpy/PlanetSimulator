@@ -26,6 +26,7 @@ EditorGlobal="*res://Global Scripts/Editor Global.gd"
 EditorSaves="*res://Global Scripts/Editor Saves.gd"
 UserInterface="*res://Global Scripts/User Interface.gd"
 Selection="*res://Global Scripts/Selection.gd"
+Objects="*res://Global Scripts/Objects.gd"
 
 [display]
 

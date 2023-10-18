@@ -79,10 +79,10 @@ func react():
 
 	set_item_disabled(
 		SELECT_ONE_RANDOMLY_INDEX,
-		not EditorGlobal.is_there_objects(),
+		not Objects.is_there_objects(),
 	)
 
 	set_item_disabled(
 		SELECT_MANY_RANDOMLY_INDEX,
-		not EditorGlobal.is_there_objects(),
+		not Objects.is_there_objects(),
 	)

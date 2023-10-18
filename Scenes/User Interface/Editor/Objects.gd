@@ -5,6 +5,8 @@ func _ready():
 
 	EditorGlobal.anything_changed.connect(renderObjects, CONNECT_DEFERRED)
 
+	Objects.on_object_removed.connect(renderObjects, CONNECT_DEFERRED)
+
 func renderObjects():
 	print('Rendering Objects Panel')
 
@@ -12,6 +14,8 @@ func renderObjects():
 		child.queue_free()
 
 	for object in get_tree().get_nodes_in_group('gravity_object'):
+
+		print(is_instance_valid(object))
 
 		var hbox = HBoxContainer.new()
 

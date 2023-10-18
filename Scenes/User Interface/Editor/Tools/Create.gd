@@ -6,7 +6,7 @@ func _init():
 	tool_icon = preload("res://Theme/Icons/plus-circle.svg")
 
 func dragEnd(starPos, endPos):
-	var planet: Planet = EditorGlobal.add_object(EditorGlobal.OBJECT_TYPES.Planet)
+	var planet: Planet = Objects.add_object()
 
 	planet.position = endPos
 	planet.motion = (starPos - endPos) * 5

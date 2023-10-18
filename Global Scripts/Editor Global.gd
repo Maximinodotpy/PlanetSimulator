@@ -10,19 +10,10 @@ const MIN_SIMULATION_SPEED = 1
 const DEFAULT_SIMULATION_SPEED = 10
 const MAX_SIMULATION_SPEED = 250
 
-var planetScene = preload("res://Scenes/Planet/Planet.tscn")
-
 ## This is called when
 ## The Selection Changes
 ## An Object is added or removed
 signal anything_changed
-
-
-enum OBJECT_TYPES {
-	Planet,
-	Ship
-}
-
 
 func _ready():
 	Selection.selection_changed.connect(callAnythingChanged)
@@ -30,28 +21,7 @@ func _ready():
 func callAnythingChanged():
 	anything_changed.emit()
 
-func is_there_objects() -> bool:
-	return get_all_objects().size() > 0
 
-func remove_object(node: Node2D):
-	Selection.remove_from_selection(node)
-	node.queue_free()
-	anything_changed.emit()
-
-func add_object(_type: OBJECT_TYPES):
-	print('Adding Planet')
-
-	var grav_obj: Planet = planetScene.instantiate()
-
-	get_space().add_child(grav_obj)
-
-	anything_changed.emit()
-
-	return grav_obj
-
-func rename_object(object: Node2D, new_name: String):
-	object.name = new_name
-	anything_changed.emit()
 
 
 func get_space() -> Node2D:
@@ -62,18 +32,6 @@ func get_space_viewport() -> Viewport:
 
 func get_file_name_edit() -> LineEdit:
 	return Helpers.getSceneRoot().find_children('File Name Edit')[0]
-
-func get_all_objects():
-	var objects = get_tree().get_nodes_in_group('gravity_object')
-
-	var return_objs = []
-
-	for i in objects:
-		if i.name != 'Space Ship':
-			pass
-		return_objs.append(i)
-
-	return return_objs
 
 
 func get_simulation_speed() -> int:

@@ -11,7 +11,7 @@ func _process(delta):
 	for i in get_children():
 		i.queue_free()
 
-	addStatus('Selected Planets: %s/%s' % [Selection.get_selection().size(), EditorGlobal.get_all_objects().size()])
+	addStatus('Selected Planets: %s/%s' % [Selection.get_selection().size(), Objects.get_all_objects().size()])
 	addStatus('FPS: %s' % Performance.get_monitor(Performance.TIME_FPS))
 
 
