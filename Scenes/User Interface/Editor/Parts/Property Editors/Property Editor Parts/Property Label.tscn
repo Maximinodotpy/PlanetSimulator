@@ -1,23 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://b36rnbp41eree"]
+[gd_scene load_steps=5 format=3 uid="uid://b36rnbp41eree"]
+
+[ext_resource type="FontFile" uid="uid://bswvowa3rk1ca" path="res://Theme/Font/Segoe UI/seguisb.ttf" id="1_ice82"]
+[ext_resource type="PackedScene" uid="uid://04ly32pqw8ub" path="res://Scenes/User Interface/Editor/Parts/No Objects Placeholder.tscn" id="1_s7rrb"]
+[ext_resource type="Texture2D" uid="uid://bptnfgusfp38h" path="res://Theme/Icons/mouse-pointer-square-dashed.png" id="2_3ewt5"]
 
 [sub_resource type="GDScript" id="GDScript_8mc3y"]
-script/source = "extends Label
+script/source = "extends CenterContainer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
+@onready var no_objects = $no_objects
+@onready var no_selection = $no_selection
+@onready var label = $Label
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Selection.get_selection().size() == 0:
-		text = 'Nothing Selected'
+	if not Objects.is_there_objects():
+		no_objects.show()
+		label.hide()
+		no_selection.hide()
+
+	elif Selection.is_empty_selection():
+		no_selection.show()
+		label.hide()
+		no_objects.hide()
+
 	elif Selection.get_selection().size() == 1:
-		text = Selection.get_selection()[0].name
+		label.show()
+		no_selection.hide()
+		no_objects.hide()
+
+		label.text = Selection.get_selection()[0].name
+
 	elif Selection.get_selection().size() > 1:
-		text = 'Multiple Objects (%s)' % [ Selection.get_selection().size() ]
+		label.show()
+		no_selection.hide()
+		no_objects.hide()
+
+		label.text = 'Multiple Objects (%s)' % [ Selection.get_selection().size() ]
 "
 
-[node name="Property Label" type="Label"]
+[node name="Property Label" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = SubResource("GDScript_8mc3y")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+text = "Node Name || Multiple Nodes"
+
+[node name="no_objects" parent="." instance=ExtResource("1_s7rrb")]
+visible = false
+modulate = Color(1, 1, 1, 0.254902)
+layout_mode = 2
+
+[node name="no_selection" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0.254902)
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="no_selection"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+texture = ExtResource("2_3ewt5")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="no_selection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ice82")
+theme_override_font_sizes/font_size = 30
+text = "Nothing Selected"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="no_selection"]
+layout_mode = 2
+text = "Select a planet to edit its properties either by using the select tool in the top-right or by using one of the many select options in the select menu."
+fit_content = true

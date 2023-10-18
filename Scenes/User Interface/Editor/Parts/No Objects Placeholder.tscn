@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://04ly32pqw8ub"]
+
+[ext_resource type="Texture2D" uid="uid://ck8i1qc1lmptm" path="res://Theme/Icons/circle-off.png" id="1_p0agg"]
+[ext_resource type="FontFile" uid="uid://bswvowa3rk1ca" path="res://Theme/Font/Segoe UI/seguisb.ttf" id="2_blte5"]
+
+[node name="no_objects" type="VBoxContainer"]
+modulate = Color(1, 1, 1, 0.254902)
+custom_minimum_size = Vector2(300, 0)
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+texture = ExtResource("1_p0agg")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_blte5")
+theme_override_font_sizes/font_size = 30
+text = "Space is Empty"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Start by adding planets via the creation tool in the top-right."
+fit_content = true

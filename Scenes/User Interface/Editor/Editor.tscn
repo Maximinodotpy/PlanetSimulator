@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=44 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Tools.gd" id="8_p7biu"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Side Panel.gd" id="10_81w7h"]
+[ext_resource type="PackedScene" uid="uid://04ly32pqw8ub" path="res://Scenes/User Interface/Editor/Parts/No Objects Placeholder.tscn" id="16_w5t37"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Selected Rect.gd" id="17_iv4k2"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Status.gd" id="20_6q2s3"]
@@ -217,7 +218,6 @@ layout_mode = 2
 
 [node name="Property Label" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("5_5tj81")]
 layout_mode = 2
-text = "PROPERTY LABEL"
 
 [node name="Property Editor Multiple" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
 layout_mode = 2
@@ -236,11 +236,20 @@ theme_override_constants/margin_bottom = 10
 
 [node name="scroll" type="ScrollContainer" parent="v/main/Side Panel/top-tabs/Objects"]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="Objects" type="VBoxContainer" parent="v/main/Side Panel/top-tabs/Objects/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_8avdp")
+
+[node name="CenterContainer" type="CenterContainer" parent="v/main/Side Panel/top-tabs/Objects/scroll/Objects"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="no_objects" parent="v/main/Side Panel/top-tabs/Objects/scroll/Objects/CenterContainer" instance=ExtResource("16_w5t37")]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="bottom-tabs" type="TabContainer" parent="v/main/Side Panel"]
 layout_mode = 2
@@ -277,7 +286,7 @@ stretch = true
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1630, 966)
+size = Vector2i(1488, 966)
 render_target_update_mode = 4
 
 [node name="Origin Markers" type="Node2D" parent="v/main/SpaceContainer/SubViewportContainer/space_viewport"]
