@@ -60,7 +60,17 @@ func get_selection():
 func select_all():
 	for object in get_tree().get_nodes_in_group('gravity_object'):
 		add_to_selection(object)
+
 	selection_changed.emit()
+
+func swap_selection(new_nodes: Array[Node2D]):
+	for old_node in get_selection():
+		if old_node not in new_nodes:
+			remove_from_selection(old_node)
+
+	for new_node in new_nodes:
+		if new_node not in get_selection():
+			add_to_selection(new_node)
 
 func add_one_random_to_selection():
 	var objects = get_all_objects()
@@ -75,11 +85,13 @@ func add_to_selection(node: Node):
 	if node not in get_selection():
 		selection.append(node)
 
-	selection_changed.emit()
+		selection_changed.emit()
 
 func clear_selection():
+	var preSelection = get_selection()
 	selection.clear()
-	selection_changed.emit()
+	if not preSelection.is_empty():
+		selection_changed.emit()
 
 func inverse_selection():
 	var newSel = []
@@ -98,7 +110,8 @@ func inverse_selection():
 func remove_from_selection(node: Node2D):
 	if node in get_selection():
 		get_selection().erase(node)
-	selection_changed.emit()
+
+		selection_changed.emit()
 
 func get_selection_rect() -> Rect2:
 	var rect = Rect2()
@@ -135,10 +148,10 @@ func get_selection_bounding_rect() -> Rect2:
 	return rect
 
 func delete_selected():
-	for object in get_selection():
+	for object in get_selection().duplicate():
 		remove_object(object)
 
-	selection_changed.emit()
+	anything_changed.emit()
 
 func move_selected_to(target_pos: Vector2):
 	var offset = target_pos - get_selection_rect().position
@@ -189,7 +202,7 @@ func center_selection_horizontaly():
 
 func remove_object(node: Node2D):
 	remove_from_selection(node)
-	node.free()
+	node.queue_free()
 	anything_changed.emit()
 
 func add_object(_type: OBJECT_TYPES):

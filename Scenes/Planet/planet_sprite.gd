@@ -3,7 +3,7 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	EditorGlobal.selection_changed.connect(queue_redraw)
+	EditorGlobal.anything_changed.connect(queue_redraw)
 
 func _draw():
 	var color = Color.WHITE

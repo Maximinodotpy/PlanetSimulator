@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://crnb8umwfskq4"]
+[gd_scene load_steps=3 format=3 uid="uid://crnb8umwfskq4"]
 
 [ext_resource type="Script" path="res://Scenes/Gravity Object/Gravity Object Template.gd" id="1_t4r3k"]
 
-[node name="gravity object" type="Node2D" groups=["gravity_object"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dcyk1"]
+resource_local_to_scene = true
+radius = 34.0
+
+[node name="gravity object" type="CharacterBody2D" groups=["gravity_object"]]
 process_mode = 1
 script = ExtResource("1_t4r3k")
+
+[node name="collision_cast" type="RayCast2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dcyk1")

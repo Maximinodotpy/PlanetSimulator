@@ -25,10 +25,10 @@ func selected():
 
 func dragStart(startPos):
 	print('Selection Started')
+	EditorGlobal.clear_selection()
 	selectBox.position = startPos
 
 func dragging(startPos, currentPos):
-
 	currenSelectionRect = Rect2(
 		min(startPos.x, currentPos.x),
 		min(startPos.y, currentPos.y),
@@ -39,20 +39,21 @@ func dragging(startPos, currentPos):
 	selectBox.position = currenSelectionRect.position
 	selectBox.size = currenSelectionRect.size
 
+	var newNodes: Array[Node2D] = []
+
+	for planet in viewport.get_tree().get_nodes_in_group('gravity_object'):
+		if currenSelectionRect.has_point(planet.position):
+			newNodes.append(planet)
+
+	EditorGlobal.swap_selection(newNodes)
+
+
 func dragEnd(starPos, endPos):
 	selectBox.size = Vector2(0, 0)
 	selectBox.position = Vector2(0, 0)
 
 	print('Select Finished')
 
-	if Input.is_key_pressed(KEY_SHIFT):
-		pass
-	else:
-		EditorGlobal.clear_selection()
-
-	for planet in viewport.get_tree().get_nodes_in_group('gravity_object'):
-		if currenSelectionRect.has_point(planet.position):
-			EditorGlobal.add_to_selection(planet)
 
 func selectionDragStart(startPos):
 	moveOffset = EditorGlobal.get_selection_rect().position - startPos
