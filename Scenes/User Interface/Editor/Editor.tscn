@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://pu0mwher7pq0"]
+[gd_scene load_steps=45 format=3 uid="uid://pu0mwher7pq0"]
 
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Editor.gd" id="1_ime2t"]
 [ext_resource type="Script" path="res://addons/godot_helpers/Nodes/Scene Switcher Button/Scene Switcher Button.gd" id="2_dgr1r"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://tn815bk1ttbo" path="res://Scenes/User Interface/Editor/Parts/Property Editors/PropertyEditorSingle.tscn" id="7_yxhf3"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Tools.gd" id="8_p7biu"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Side Panel.gd" id="10_81w7h"]
+[ext_resource type="Script" path="res://Scenes/User Interface/Editor/Main V Split.gd" id="10_g7cx0"]
 [ext_resource type="PackedScene" uid="uid://04ly32pqw8ub" path="res://Scenes/User Interface/Editor/Parts/No Objects Placeholder.tscn" id="16_w5t37"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Origin Markers.gd" id="17_i2gys"]
 [ext_resource type="Script" path="res://Scenes/User Interface/Editor/Selected Rect.gd" id="17_iv4k2"]
@@ -195,6 +196,7 @@ script = ExtResource("4_gsugx")
 [node name="main" type="HSplitContainer" parent="v"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("10_g7cx0")
 
 [node name="Side Panel" type="VSplitContainer" parent="v/main"]
 layout_mode = 2
@@ -220,6 +222,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Property Editor Multiple" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("5_n20wa")]
+visible = false
 layout_mode = 2
 
 [node name="Property Editor Single" parent="v/main/Side Panel/top-tabs/Properties/v" instance=ExtResource("7_yxhf3")]
